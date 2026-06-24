@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recompensas - FF ARENA RD</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .reward-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .reward-icon {
+            font-size: 40px;
+            background: #222;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+        }
+        .reward-details h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        .how-to-win {
+            background: rgba(255,0,0,0.05);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">FF <span>ARENA</span> RD</div>
+            <nav id="main-nav">
+                <a href="index.html">Inicio</a>
+                <a href="torneos.html">Torneos</a>
+                <a href="perfil.html" class="hidden" id="nav-profile">Mi Perfil</a>
+                <a href="admin.html" class="hidden" id="nav-admin">Admin</a>
+                <a href="auth.html" id="nav-login">Iniciar Sesión</a>
+            </nav>
+        </header>
+
+        <section style="padding: 60px 0;">
+            <h1 style="color: var(--primary); margin-bottom: 10px;">RECOMPENSAS DISPONIBLES</h1>
+            <p style="color: var(--text-dim); margin-bottom: 40px;">Conoce lo que puedes ganar participando en nuestros torneos.</p>
+
+            <div class="how-to-win">
+                <h2 style="margin-bottom: 15px;">¿Cómo ganar?</h2>
+                <p>Participar es sencillo, pero ganar requiere habilidad. Aquí te explicamos los métodos:</p>
+                <div style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h4 style="color: white;">1. Victoria Magistral</h4>
+                        <p style="font-size: 14px; color: var(--text-dim);">Queda en 1er lugar en torneos Battle Royale o gana tu duelo 1v1 para llevarte el premio mayor del torneo.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: white;">2. Rey de las Kills</h4>
+                        <p style="font-size: 14px; color: var(--text-dim);">En algunos torneos, el jugador con más eliminaciones recibe un bono especial de diamantes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reward-item">
+                <div class="reward-icon">🎟️</div>
+                <div class="reward-details">
+                    <h3>Pase Booyah Mensual</h3>
+                    <p>Acceso total a las recompensas de la temporada actual. Incluye skins, personajes y cajas exclusivas.</p>
+                    <p style="font-size: 12px; color: var(--text-dim); margin-top: 5px;">*Se entrega vía recarga directa o tarjeta de regalo.</p>
+                </div>
+            </div>
+
+            <div class="reward-item">
+                <div class="reward-icon">💎</div>
+                <div class="reward-details">
+                    <h3>Paquete de 500-800 Diamantes</h3>
+                    <p>Diamantes directos a tu cuenta para que compres lo que quieras en la tienda oficial.</p>
+                    <p style="font-size: 12px; color: var(--text-dim); margin-top: 5px;">*Cantidad varía según el tipo de torneo.</p>
+                </div>
+            </div>
+
+            <div class="reward-item">
+                <div class="reward-icon">🎖️</div>
+                <div class="reward-details">
+                    <h3>Puntos de Arena</h3>
+                    <p>Por cada participación acumulas puntos en nuestro ranking. Los mejores del mes reciben premios sorpresa.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <a href="torneos.html" class="btn btn-primary">Ver Torneos Próximos</a>
+            </div>
+        </section>
+
+        <footer style="margin-top: 100px; padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: #555;">
+            <p>© 2024 FF ARENA RD - TORNEOS NO OFICIALES</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

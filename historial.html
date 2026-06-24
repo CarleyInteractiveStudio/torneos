@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Torneos - FF ARENA RD</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .history-table th:last-child, .history-table td:last-child {
+            text-align: right;
+        }
+        .player-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--primary);
+        }
+        .tournament-group {
+            margin-bottom: 50px;
+        }
+        .tournament-header {
+            background: var(--bg-card);
+            padding: 15px 20px;
+            border-left: 5px solid var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">FF <span>ARENA</span> RD</div>
+            <nav id="main-nav">
+                <a href="index.html">Inicio</a>
+                <a href="torneos.html">Torneos</a>
+                <a href="perfil.html" class="hidden" id="nav-profile">Mi Perfil</a>
+                <a href="admin.html" class="hidden" id="nav-admin">Admin</a>
+                <a href="auth.html" id="nav-login">Iniciar Sesión</a>
+            </nav>
+        </header>
+
+        <section style="padding: 60px 0;">
+            <h1 style="color: var(--primary); margin-bottom: 10px;">HISTORIAL DE TORNEOS</h1>
+            <p style="color: var(--text-dim); margin-bottom: 40px;">Resultados de todas las competencias pasadas.</p>
+
+            <div id="historial-container">
+                <p>Cargando historial...</p>
+                <!-- Aquí se cargarán los torneos dinámicamente -->
+            </div>
+
+            <div style="margin-top: 40px;">
+                <a href="index.html" class="btn btn-primary">Volver al Inicio</a>
+            </div>
+        </section>
+
+        <footer style="margin-top: 100px; padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: #555;">
+            <p>© 2024 FF ARENA RD - TORNEOS NO OFICIALES</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Lógica específica para el historial
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Esperamos un poco para que app.js inicialice supabase
+            setTimeout(async () => {
+                if (typeof supabase !== 'undefined') {
+                    await cargarHistorial();
+                }
+            }, 500);
+        });
+
+        async function cargarHistorial() {
+            const container = document.getElementById('historial-container');
+
+            // Obtener torneos finalizados
+            const { data: torneos, error: tError } = await supabase
+                .from('torneos')
+                .select('*')
+                .eq('estado', 'finalizado')
+                .order('created_at', { ascending: false });
+
+            if (tError) {
+                container.innerHTML = '<p>Error al cargar el historial.</p>';
+                return;
+            }
+
+            if (!torneos || torneos.length === 0) {
+                container.innerHTML = '<p>No hay torneos finalizados todavía.</p>';
+                return;
+            }
+
+            container.innerHTML = '';
+
+            for (const torneo of torneos) {
+                const group = document.createElement('div');
+                group.className = 'tournament-group';
+
+                const header = document.createElement('div');
+                header.className = 'tournament-header';
+                header.innerHTML = `
+                    <div>
+                        <h3 style="margin:0">${torneo.titulo}</h3>
+                        <small style="color: var(--text-dim)">${torneo.tipo.toUpperCase()} • ${new Date(torneo.created_at).toLocaleDateString()}</small>
+                    </div>
+                    <span style="color: var(--primary); font-weight: bold;">FINALIZADO</span>
+                `;
+
+                const table = document.createElement('table');
+                table.className = 'history-table';
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Jugador</th>
+                            <th>Kills</th>
+                            <th>Puntos</th>
+                            <th>Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body-${torneo.id}">
+                        <tr><td colspan="4">Cargando resultados...</td></tr>
+                    </tbody>
+                `;
+
+                group.appendChild(header);
+                group.appendChild(table);
+                container.appendChild(group);
+
+                // Cargar participantes de este torneo
+                cargarParticipantes(torneo.id);
+            }
+        }
+
+        async function cargarParticipantes(torneoId) {
+            const tbody = document.getElementById(`body-${torneoId}`);
+
+            const { data: participantes, error } = await supabase
+                .from('participantes')
+                .select(`
+                    kills,
+                    puntos_ganados,
+                    perfiles (nickname, foto_url)
+                `)
+                .eq('torneo_id', torneoId)
+                .order('puntos_ganados', { ascending: false });
+
+            if (error || !participantes) {
+                tbody.innerHTML = '<tr><td colspan="4">Error al cargar participantes.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = '';
+            participantes.forEach(p => {
+                const row = document.createElement('tr');
+                const foto = p.perfiles.foto_url || 'https://via.placeholder.com/40';
+                row.innerHTML = `
+                    <td style="font-weight: bold;">${p.perfiles.nickname}</td>
+                    <td>${p.kills}</td>
+                    <td>${p.puntos_ganados}</td>
+                    <td><img src="${foto}" class="player-photo" alt="Avatar"></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>

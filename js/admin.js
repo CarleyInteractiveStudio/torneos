@@ -61,23 +61,48 @@ async function loadTournamentsForResults() {
         select.appendChild(opt);
     });
 
-    select.onchange = async () => {
-        const { data: players } = await sb.from('participantes').select('*, perfiles(nickname, id)').eq('torneo_id', select.value).eq('estado_pago', 'completado');
-        const container = document.getElementById('players-results-list');
-        container.innerHTML = players.map(p => `
-            <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
-                <span>${p.perfiles.nickname} (Kills: ${p.kills})</span>
-                <button onclick="addKill('${p.id}', ${p.kills}, '${p.perfiles.id}')" class="btn btn-primary">+1 Kill</button>
-            </div>
-        `).join('');
-    };
+    select.onchange = renderPlayers;
+}
+
+async function renderPlayers() {
+    const torneoId = document.getElementById('select-torneo-results').value;
+    if (!torneoId) return;
+
+    const { data: players } = await sb.from('participantes').select('*, perfiles(nickname, id)').eq('torneo_id', torneoId).eq('estado_pago', 'completado');
+    const container = document.getElementById('players-results-list');
+
+    // Botón para finalizar torneo
+    const finalizeBtn = `<button onclick="finalizeTournament('${torneoId}')" class="btn" style="background: var(--primary); margin-bottom: 20px; width: 100%;">FINALIZAR TORNEO Y PASAR A HISTORIAL</button>`;
+
+    container.innerHTML = finalizeBtn + players.map(p => `
+        <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+            <span>${p.perfiles.nickname} (Kills: ${p.kills})</span>
+            <button onclick="addKill('${p.id}', ${p.kills}, '${p.perfiles.id}')" class="btn btn-primary">+1 Kill</button>
+        </div>
+    `).join('');
 }
 
 window.addKill = async (partId, currentKills, userId) => {
-    await sb.from('participantes').update({ kills: currentKills + 1, puntos_ganados: (currentKills + 1) * 10 }).eq('id', partId);
+    const newKills = currentKills + 1;
+    await sb.from('participantes').update({
+        kills: newKills,
+        puntos_ganados: newKills * 10
+    }).eq('id', partId);
+
     const { data: user } = await sb.from('perfiles').select('puntos_totales').eq('id', userId).single();
-    await sb.from('perfiles').update({ puntos_totales: (user.puntos_totales || 0) + 10 }).eq('id', userId);
-    alert("Puntos sumados!");
+    await sb.from('perfiles').update({
+        puntos_totales: (user.puntos_totales || 0) + 10
+    }).eq('id', userId);
+
+    renderPlayers(); // Recargar la lista para actualizar el contador sin refrescar página
+};
+
+window.finalizeTournament = async (torneoId) => {
+    if (confirm("¿Estás seguro de finalizar este torneo? Ya no se podrán sumar más kills y pasará al historial.")) {
+        await sb.from('torneos').update({ estado: 'finalizado' }).eq('id', torneoId);
+        alert("Torneo finalizado con éxito.");
+        location.reload();
+    }
 };
 
 checkAdmin();
