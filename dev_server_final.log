@@ -1,0 +1,22 @@
+
+> tmp-app@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.2.0
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.2:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 2.2s
+ ○ Compiling / ...
+ ✓ Compiled / in 7.3s (879 modules)
+ GET / 200 in 8928ms
+ ○ Compiling /register ...
+ ✓ Compiled /register in 2.5s (988 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /register 200 in 3240ms
+ ✓ Compiled /ranking in 316ms (981 modules)
+ GET /ranking 200 in 7609ms
+ ✓ Compiled in 219ms (417 modules)
+ ✓ Compiled in 140ms (417 modules)
