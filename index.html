@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF ARENA RD - Inicio</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">FF <span>ARENA</span> RD</div>
+            <nav id="main-nav">
+                <a href="index.html">Inicio</a>
+                <a href="torneos.html">Torneos</a>
+                <a href="perfil.html" class="hidden" id="nav-profile">Mi Perfil</a>
+                <a href="admin.html" class="hidden" id="nav-admin">Admin</a>
+                <a href="auth.html" id="nav-login">Iniciar Sesión</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>DOMINA LA ARENA</h1>
+            <p style="color: #a0a0a0; font-size: 20px; margin-bottom: 30px;">Gana Pases Booyah y Diamantes cada semana en República Dominicana.</p>
+            <div>
+                <a href="torneos.html" class="btn btn-primary">Ver Torneos</a>
+                <a href="auth.html" class="btn" style="background: white; color: black; margin-left: 10px;">Unirse</a>
+            </div>
+        </section>
+
+        <div class="grid">
+            <div class="card" style="text-align: center;">
+                <h3 style="color: var(--primary);">PREMIOS REALES</h3>
+                <p>Pases Booyah y 500-800 Diamantes para los ganadores.</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: var(--primary);">VOTACIÓN</h3>
+                <p>Tú eliges: ¿Duelo 1v1 o Battle Royale? Vota cada semana.</p>
+            </div>
+            <div class="card" style="text-align: center;">
+                <h3 style="color: var(--primary);">COMUNIDAD RD</h3>
+                <p>El mejor nivel de República Dominicana en un solo lugar.</p>
+            </div>
+        </div>
+
+        <footer style="margin-top: 100px; padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: #555;">
+            <p>© 2024 FF ARENA RD - TORNEOS NO OFICIALES</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

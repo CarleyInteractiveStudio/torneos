@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - FF ARENA RD</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">FF <span>ARENA</span> RD</div>
+            <nav><a href="index.html">Inicio</a> <a href="torneos.html">Torneos</a></nav>
+        </header>
+
+        <h1 style="margin-top: 40px; color: red;">PANEL ADMIN</h1>
+
+        <div class="grid">
+            <div class="card">
+                <h3>CREAR TORNEO</h3>
+                <form id="create-tournament-form">
+                    <input type="text" id="t-titulo" placeholder="Nombre" required>
+                    <select id="t-tipo">
+                        <option value="1v1">Duelo 1v1</option>
+                        <option value="br">Battle Royale</option>
+                    </select>
+                    <input type="number" id="t-precio" placeholder="Precio ($)" required>
+                    <textarea id="t-premio" placeholder="Premio"></textarea>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">CREAR</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>PAGOS PENDIENTES</h3>
+                <table>
+                    <thead>
+                        <tr><th>Jugador</th><th>Torneo</th><th>Acción</th></tr>
+                    </thead>
+                    <tbody id="pending-payments"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 40px;">
+            <h3>SUMAR KILLS</h3>
+            <select id="select-torneo-results"><option value="">Seleccionar...</option></select>
+            <div id="players-results-list" class="grid"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
