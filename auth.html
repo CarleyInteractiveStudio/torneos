@@ -3,36 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso - FF ARENA RD</title>
+    <title>Acceso - FF ARENA LATAM</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="logo">FF <span>ARENA</span> RD</div>
+            <div class="logo">FF <span>ARENA</span> LATAM</div>
             <nav><a href="index.html">← Volver</a></nav>
         </header>
 
         <div style="max-width: 400px; margin: 60px auto;">
             <div class="card" id="login-card">
-                <h2 style="text-align: center; margin-bottom: 20px; color: var(--primary);">INICIAR SESIÓN</h2>
+                <h2 id="login-title-h2" style="text-align: center; margin-bottom: 20px; color: var(--primary);">INICIAR SESIÓN</h2>
                 <form id="login-form">
                     <input type="email" id="login-email" placeholder="Correo Electrónico" required>
                     <input type="password" id="login-password" placeholder="Contraseña" required>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">ENTRAR</button>
+                    <button type="submit" id="login-btn-submit" class="btn btn-primary" style="width: 100%;">ENTRAR</button>
                 </form>
                 <p style="text-align: center; margin-top: 20px; font-size: 14px;">
-                    ¿No tienes cuenta? <a href="#" id="show-register" style="color: var(--primary);">Regístrate</a><br>
+                    <span id="login-no-account-text">¿No tienes cuenta?</span> <a href="#" id="show-register" style="color: var(--primary);">Regístrate</a><br>
                     <a href="#" id="show-recovery" style="color: #666; font-size: 12px;">Olvidé mi contraseña</a>
                 </p>
             </div>
 
             <div class="card hidden" id="recovery-card">
-                <h2 style="text-align: center; margin-bottom: 20px; color: var(--primary);">RECUPERAR ACCESO</h2>
+                <h2 id="recovery-title-h2" style="text-align: center; margin-bottom: 20px; color: var(--primary);">RECUPERAR ACCESO</h2>
                 <form id="recovery-form">
                     <input type="email" id="rec-email" placeholder="Correo Registrado" required>
                     <input type="text" id="rec-ffid" placeholder="Tu ID de Free Fire" required>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">ENVIAR ENLACE</button>
+                    <button type="submit" id="recovery-btn-submit" class="btn btn-primary" style="width: 100%;">ENVIAR ENLACE</button>
                 </form>
                 <p style="text-align: center; margin-top: 20px; font-size: 14px;">
                     <a href="#" id="show-login-2" style="color: var(--primary);">Volver al Login</a>
@@ -40,25 +40,26 @@
             </div>
 
             <div class="card hidden" id="register-card">
-                <h2 style="text-align: center; margin-bottom: 20px; color: var(--primary);">REGISTRO GUERRERO</h2>
+                <h2 id="register-title-h2" style="text-align: center; margin-bottom: 20px; color: var(--primary);">REGISTRO GUERRERO</h2>
                 <form id="register-form">
                     <input type="email" id="reg-email" placeholder="Correo Electrónico" required>
                     <input type="text" id="reg-nickname" placeholder="Nickname en Free Fire" required>
                     <input type="text" id="reg-ffid" placeholder="ID de Free Fire" required>
-                    <small style="color: #666; display: block; margin-bottom: 5px;">Asegúrate de que el ID esté correcto.</small>
-                    <label style="font-size: 12px; color: #aaa; display: block; margin-bottom: 5px;">Foto de Perfil (URL)</label>
+                    <small id="register-id-warning-small" style="color: #666; display: block; margin-bottom: 5px;">Asegúrate de que el ID esté correcto.</small>
+                    <label id="register-photo-label-text" style="font-size: 12px; color: #aaa; display: block; margin-bottom: 5px;">Foto de Perfil (URL)</label>
                     <input type="text" id="reg-foto" placeholder="URL de tu imagen">
                     <input type="password" id="reg-password" placeholder="Contraseña" required>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">REGISTRARSE</button>
+                    <button type="submit" id="register-btn-submit" class="btn btn-primary" style="width: 100%;">REGISTRARSE</button>
                 </form>
                 <p style="text-align: center; margin-top: 20px; font-size: 14px;">
-                    ¿Ya tienes cuenta? <a href="#" id="show-login" style="color: var(--primary);">Inicia Sesión</a>
+                    <span id="register-have-account-text">¿Ya tienes cuenta?</span> <a href="#" id="show-login" style="color: var(--primary);">Inicia Sesión</a>
                 </p>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/translations.js"></script>
     <script src="js/auth.js"></script>
 </body>
 </html>

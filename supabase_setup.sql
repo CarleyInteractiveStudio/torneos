@@ -8,6 +8,7 @@ CREATE TABLE perfiles (
   email TEXT NOT NULL,
   puntos_totales INTEGER DEFAULT 0,
   foto_url TEXT,
+  pais TEXT,
   es_admin BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

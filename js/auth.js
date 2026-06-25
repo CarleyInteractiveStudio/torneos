@@ -2,7 +2,12 @@
 const SUPABASE_URL = 'TU_URL_DE_SUPABASE';
 const SUPABASE_KEY = 'TU_LLAVE_ANON_DE_SUPABASE';
 
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let sb;
+try {
+    sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+} catch (e) {
+    console.error("Error creating Supabase client:", e);
+}
 window.sb = sb;
 
 // Lógica de Registro
@@ -19,12 +24,14 @@ document.getElementById('register-form')?.addEventListener('submit', async (e) =
     if (error) {
         alert("Error: " + error.message);
     } else if (data.user) {
+        const pais = localStorage.getItem('user_country') || 'Desconocido';
         const { error: pError } = await sb.from('perfiles').insert({
             id: data.user.id,
             email,
             nickname,
             ff_id: ffid,
-            foto_url: foto
+            foto_url: foto,
+            pais: pais
         });
         if (pError) alert("Error perfil: " + pError.message);
         else window.location.href = 'perfil.html';
@@ -39,8 +46,15 @@ document.getElementById('login-form')?.addEventListener('submit', async (e) => {
 
     const { data, error } = await sb.auth.signInWithPassword({ email, password });
 
-    if (error) alert("Error: " + error.message);
-    else window.location.href = 'perfil.html';
+    if (error) {
+        alert("Error: " + error.message);
+    } else {
+        const pais = localStorage.getItem('user_country');
+        if (pais) {
+            await sb.from('perfiles').update({ pais: pais }).eq('id', data.user.id);
+        }
+        window.location.href = 'perfil.html';
+    }
 });
 
 // Navegación entre formularios

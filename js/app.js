@@ -2,13 +2,34 @@
 const SUPABASE_URL = 'TU_URL_DE_SUPABASE';
 const SUPABASE_KEY = 'TU_LLAVE_ANON_DE_SUPABASE';
 
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let sb;
+try {
+    sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+} catch (e) {
+    console.error("Error creating Supabase client:", e);
+}
 
 let currentUser = null;
 
 async function init() {
-    const { data: { session } } = await sb.auth.getSession();
+    let session = null;
+    if (sb) {
+        try {
+            const res = await sb.auth.getSession();
+            session = res.data.session;
+        } catch (e) {
+            console.error("Error fetching session:", e);
+        }
+    }
     currentUser = session?.user;
+
+    const publicPages = ['auth.html', 'privacidad.html'];
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+    if (!currentUser && !publicPages.includes(currentPage)) {
+        window.location.href = 'auth.html';
+        return;
+    }
 
     if (currentUser) {
         document.querySelectorAll('#nav-profile').forEach(el => el.classList.remove('hidden'));
@@ -132,6 +153,7 @@ async function loadProfile() {
     if (p) {
         document.getElementById('p-nickname').innerText = p.nickname;
         document.getElementById('p-ffid').innerText = `ID: ${p.ff_id}`;
+        if (document.getElementById('p-pais')) document.getElementById('p-pais').innerText = p.pais || '';
         document.getElementById('p-puntos').innerText = p.puntos_totales;
     }
 }
