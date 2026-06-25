@@ -1,7 +1,3 @@
-// CONFIGURACIÓN - REEMPLAZA CON TUS DATOS
-const SUPABASE_URL = 'TU_URL_DE_SUPABASE';
-const SUPABASE_KEY = 'TU_LLAVE_ANON_DE_SUPABASE';
-
 let sb;
 try {
     sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);

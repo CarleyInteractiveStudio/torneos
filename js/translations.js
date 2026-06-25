@@ -42,7 +42,7 @@ const translations = {
         register_login_link: "Inicia Sesión",
         placeholder_email: "Correo Electrónico",
         placeholder_password: "Contraseña",
-        placeholder_nickname: "Nickname en Free Fire",
+        placeholder_nickname: "Nombre de jugador",
         placeholder_ffid: "ID de Free Fire",
         placeholder_photo: "URL de tu imagen"
     },
@@ -89,7 +89,7 @@ const translations = {
         register_login_link: "Se Connecter",
         placeholder_email: "E-mail",
         placeholder_password: "Mot de passe",
-        placeholder_nickname: "Surnom dans Free Fire",
+        placeholder_nickname: "Nom du joueur",
         placeholder_ffid: "ID de Free Fire",
         placeholder_photo: "URL de votre image"
     },
@@ -136,7 +136,7 @@ const translations = {
         register_login_link: "Konekte",
         placeholder_email: "Imèl",
         placeholder_password: "Modpas",
-        placeholder_nickname: "Nickname nan Free Fire",
+        placeholder_nickname: "Non jwè a",
         placeholder_ffid: "ID Free Fire",
         placeholder_photo: "URL imaj ou"
     },
@@ -183,7 +183,7 @@ const translations = {
         register_login_link: "Entrar",
         placeholder_email: "E-mail",
         placeholder_password: "Senha",
-        placeholder_nickname: "Apelido no Free Fire",
+        placeholder_nickname: "Nome do jogador",
         placeholder_ffid: "ID do Free Fire",
         placeholder_photo: "URL da sua imagem"
     }
