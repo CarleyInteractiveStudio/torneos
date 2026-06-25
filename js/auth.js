@@ -13,7 +13,14 @@ document.getElementById('register-form')?.addEventListener('submit', async (e) =
     const password = document.getElementById('reg-password').value;
     const nickname = document.getElementById('reg-nickname').value;
     const ffid = document.getElementById('reg-ffid').value;
-    const foto = document.getElementById('reg-foto').value;
+    const passwordConfirm = document.getElementById('reg-password-confirm').value;
+
+    if (password !== passwordConfirm) {
+        const lang = localStorage.getItem('preferred_lang') || 'es';
+        const errorMsg = (typeof translations !== 'undefined') ? translations[lang].error_password_mismatch : "Las contraseñas no coinciden.";
+        alert(errorMsg);
+        return;
+    }
 
     const { data, error } = await sb.auth.signUp({ email, password });
 
@@ -26,7 +33,6 @@ document.getElementById('register-form')?.addEventListener('submit', async (e) =
             email,
             nickname,
             ff_id: ffid,
-            foto_url: foto,
             pais: pais
         });
         if (pError) alert("Error perfil: " + pError.message);

@@ -1,5 +1,6 @@
 const translations = {
     es: {
+        page_title: "FF ARENA LATAM - Inicio",
         title: "DOMINA LA ARENA",
         hero_p: "Gana Pases Booyah y Diamantes cada semana en Latinoamérica.",
         btn_tournaments: "Ver Torneos",
@@ -36,7 +37,6 @@ const translations = {
         recovery_back: "Volver al Login",
         register_title: "REGISTRO GUERRERO",
         register_id_warning: "Asegúrate de que el ID esté correcto.",
-        register_photo_label: "Foto de Perfil (URL)",
         register_btn: "REGISTRARSE",
         register_have_account: "¿Ya tienes cuenta?",
         register_login_link: "Inicia Sesión",
@@ -44,9 +44,47 @@ const translations = {
         placeholder_password: "Contraseña",
         placeholder_nickname: "Nombre de jugador",
         placeholder_ffid: "ID de Free Fire",
-        placeholder_photo: "URL de tu imagen"
+        placeholder_password_confirm: "Confirmar Contraseña",
+        error_password_mismatch: "Las contraseñas no coinciden.",
+        tournaments_title: "TORNEOS ACTIVOS",
+        tournaments_loading: "Cargando torneos...",
+        tournaments_enroll: "INSCRIPCIÓN",
+        tournaments_price: "Precio:",
+        tournaments_cancel: "CANCELAR",
+        tournaments_btn_enroll: "INSCRIBIRSE",
+        tournaments_reward: "Premio:",
+        history_title: "CAMPEONES DE LA ARENA",
+        history_subtitle: "Leyendas que dominaron el campo de batalla.",
+        prizes_title: "RECOMPENSAS DISPONIBLES",
+        prizes_subtitle: "Conoce lo que puedes ganar participando en nuestros torneos.",
+        prizes_how_to_win: "¿Cómo ganar?",
+        prizes_how_to_win_p: "Participar es sencillo, pero ganar requiere habilidad. Aquí te explicamos los métodos:",
+        prizes_win_1_title: "1. Victoria Magistral",
+        prizes_win_1_p: "Queda en 1er lugar en torneos Battle Royale o gana tu duelo 1v1 para llevarte el premio mayor del torneo.",
+        prizes_win_2_title: "2. Rey de las Kills",
+        prizes_win_2_p: "En algunos torneos, el jugador con más eliminaciones recibe un bono especial de diamantes.",
+        prizes_booyah: "Pase Booyah Mensual",
+        prizes_booyah_p: "Acceso total a las recompensas de la temporada actual. Incluye skins, personajes y cajas exclusivas.",
+        prizes_booyah_note: "*Se entrega vía recarga directa o tarjeta de regalo.",
+        prizes_diamonds: "Paquete de 500-800 Diamantes",
+        prizes_diamonds_p: "Diamantes directos a tu cuenta para que compres lo que quieras en la tienda oficial.",
+        prizes_diamonds_note: "*Cantidad varía según el tipo de torneo.",
+        prizes_points: "Puntos de Arena",
+        prizes_points_p: "Por cada participación acumulas puntos en nuestro ranking. Los mejores del mes reciben premios sorpresa.",
+        privacy_title: "PRIVACIDAD Y DESCARGOS",
+        privacy_disclaimer: "FF ARENA LATAM es una plataforma independiente de organización de torneos competitivos. Este sitio, sus administradores y los torneos organizados aquí NO están afiliados, asociados, patrocinados ni respaldados por Garena ni Free Fire.",
+        privacy_no_affiliation_title: "Aviso de No Afiliación",
+        privacy_no_affiliation_p: "Todas las marcas comerciales, nombres de juegos y logotipos son propiedad de sus respectivos dueños.",
+        privacy_about_tournaments_title: "Sobre los Torneos",
+        privacy_about_tournaments_p: "Nuestros eventos son torneos de habilidad (eSports). Los participantes pagan una cuota de inscripción que se utiliza para financiar los premios y la administración de la plataforma.",
+        privacy_rule_1: "El fraude o uso de hacks resultará en baneo inmediato sin reembolso.",
+        privacy_rule_2: "Las decisiones de los administradores en cuanto a resultados de partidas son finales.",
+        privacy_rule_3: "Los premios se entregan en un plazo máximo de 48 horas tras finalizar el torneo.",
+        privacy_data_usage_title: "Uso de Datos",
+        privacy_data_usage_p: "Solo recolectamos tu ID de Free Fire y correo electrónico para fines de identificación en los torneos y entrega de premios. No compartimos tu información con terceros."
     },
     fr: {
+        page_title: "FF ARENA LATAM - Accueil",
         title: "DOMINEZ L'ARÈNE",
         hero_p: "Gagnez des Pass Booyah et des Diamants chaque semaine en Amérique Latine.",
         btn_tournaments: "Voir les Tournois",
@@ -83,7 +121,6 @@ const translations = {
         recovery_back: "Retour au Login",
         register_title: "INSCRIPTION GUERRIER",
         register_id_warning: "Assurez-vous que l'ID est correct.",
-        register_photo_label: "Photo de Profil (URL)",
         register_btn: "S'INSCRIRE",
         register_have_account: "Vous avez déjà un compte ?",
         register_login_link: "Se Connecter",
@@ -91,9 +128,47 @@ const translations = {
         placeholder_password: "Mot de passe",
         placeholder_nickname: "Nom du joueur",
         placeholder_ffid: "ID de Free Fire",
-        placeholder_photo: "URL de votre image"
+        placeholder_password_confirm: "Confirmer le mot de passe",
+        error_password_mismatch: "Les mots de passe ne correspondent pas.",
+        tournaments_title: "TOURNOIS ACTIFS",
+        tournaments_loading: "Chargement des tournois...",
+        tournaments_enroll: "INSCRIPTION",
+        tournaments_price: "Prix:",
+        tournaments_cancel: "ANNULER",
+        tournaments_btn_enroll: "S'INSCRIRE",
+        tournaments_reward: "Prix:",
+        history_title: "CHAMPIONS DE L'ARÈNE",
+        history_subtitle: "Légendes qui ont dominé le champ de bataille.",
+        prizes_title: "RÉCOMPENSES DISPONIBLES",
+        prizes_subtitle: "Découvrez ce que vous pouvez gagner en participant à nos tournois.",
+        prizes_how_to_win: "Comment gagner ?",
+        prizes_how_to_win_p: "Participer est simple, mais gagner demande de l'habileté. Voici les méthodes :",
+        prizes_win_1_title: "1. Victoire Magistrale",
+        prizes_win_1_p: "Terminez à la 1ère place des tournois Battle Royale ou gagnez votre duel 1v1 pour remporter le grand prix du tournoi.",
+        prizes_win_2_title: "2. Roi des Kills",
+        prizes_win_2_p: "Dans certains tournois, le joueur avec le plus d'éliminations reçoit un bonus spécial de diamants.",
+        prizes_booyah: "Pass Booyah Mensuel",
+        prizes_booyah_p: "Accès total aux récompenses de la saison actuelle. Comprend des skins, des personnages et des boîtes exclusives.",
+        prizes_booyah_note: "*Livré via recharge directe ou carte cadeau.",
+        prizes_diamonds: "Pack de 500-800 Diamants",
+        prizes_diamonds_p: "Des diamants directement sur votre compte pour acheter ce que vous voulez dans la boutique officielle.",
+        prizes_diamonds_note: "*La quantité varie selon le type de tournoi.",
+        prizes_points: "Points d'Arène",
+        prizes_points_p: "Pour chaque participation, vous accumulez des points dans notre classement. Les meilleurs du mois reçoivent des prix surprises.",
+        privacy_title: "CONFIDENTIALITÉ ET CLAUSES DE NON-RESPONSABILITÉ",
+        privacy_disclaimer: "FF ARENA LATAM est une plateforme indépendante d'organisation de tournois compétitifs. Ce site, ses administrateurs et les tournois organisés ici ne sont PAS affiliés, associés, sponsorisés ou approuvés par Garena ou Free Fire.",
+        privacy_no_affiliation_title: "Avis de non-affiliation",
+        privacy_no_affiliation_p: "Toutes les marques commerciales, noms de jeux et logos sont la propriété de leurs propriétaires respectifs.",
+        privacy_about_tournaments_title: "À propos des tournois",
+        privacy_about_tournaments_p: "Nos événements sont des tournois de compétence (eSports). Les participants paient des frais d'inscription qui servent à financer les prix et l'administration de la plateforme.",
+        privacy_rule_1: "La fraude ou l'utilisation de hacks entraînera un bannissement immédiat sans remboursement.",
+        privacy_rule_2: "Les décisions des administrateurs concernant les résultats des matchs sont finales.",
+        privacy_rule_3: "Les prix sont livrés dans un délai maximum de 48 heures après la fin du tournoi.",
+        privacy_data_usage_title: "Utilisation des données",
+        privacy_data_usage_p: "Nous ne collectons votre ID Free Fire et votre e-mail qu'à des fins d'identification dans les tournois et pour la remise des prix. Nous ne partageons pas vos informations avec des tiers."
     },
     ht: {
+        page_title: "FF ARENA LATAM - Akèy",
         title: "DOMINE AREN AN",
         hero_p: "Ganyen Pass Booyah ak Diaman chak semèn nan Amerik Latin nan.",
         btn_tournaments: "Gade Tounwa yo",
@@ -130,7 +205,6 @@ const translations = {
         recovery_back: "Retounen nan Login",
         register_title: "ENSKRIPSYON SOLDA",
         register_id_warning: "Sèten ID an kòrèk.",
-        register_photo_label: "Foto Pwofil (URL)",
         register_btn: "ENSKRI",
         register_have_account: "Ou gen yon kont deja?",
         register_login_link: "Konekte",
@@ -138,9 +212,47 @@ const translations = {
         placeholder_password: "Modpas",
         placeholder_nickname: "Non jwè a",
         placeholder_ffid: "ID Free Fire",
-        placeholder_photo: "URL imaj ou"
+        placeholder_password_confirm: "Konfime Modpas",
+        error_password_mismatch: "Modpas yo pa koresponn.",
+        tournaments_title: "TOUNWA KI AKTIF",
+        tournaments_loading: "Chaje tounwa yo...",
+        tournaments_enroll: "ENSKRIPSYON",
+        tournaments_price: "Pri:",
+        tournaments_cancel: "ANILE",
+        tournaments_btn_enroll: "ENSKRI",
+        tournaments_reward: "Prim:",
+        history_title: "CHANPYON ARENA YO",
+        history_subtitle: "Lijand ki te domine chan batay la.",
+        prizes_title: "REKONPANS KI DISPONIB",
+        prizes_subtitle: "Konekte ak sa ou ka ganyen lè ou patisipe nan tounwa nou yo.",
+        prizes_how_to_win: "Kijan pou ganyen?",
+        prizes_how_to_win_p: "Patisipe se senp, men ganyen mande konpetans. Men metòd yo:",
+        prizes_win_1_title: "1. Viktwa Majestral",
+        prizes_win_1_p: "Rete nan 1ye plas nan tounwa Battle Royale oswa ganyen duel 1v1 ou pou pran pi gwo prim tounwa a.",
+        prizes_win_2_title: "2. Wa Kills yo",
+        prizes_win_2_p: "Nan kèk tounwa, jwè ki gen plis eliminasyon resevwa yon bonis espesyal dyaman.",
+        prizes_booyah: "Pase Booyah chak mwa",
+        prizes_booyah_p: "Aksè total nan rekonpans sezon aktyèl la. Gen ladan skins, pèsonaj ak bwat eksklizif.",
+        prizes_booyah_note: "*Li livre pa rechaj dirèk oswa kat kado.",
+        prizes_diamonds: "Pakèt 500-800 Dyaman",
+        prizes_diamonds_p: "Dyaman dirèk nan kont ou pou ou ka achte sa ou vle nan boutik ofisyèl la.",
+        prizes_diamonds_note: "*Kantite a varye selon kalite tounwa a.",
+        prizes_points: "Pwen Arena",
+        prizes_points_p: "Pou chak patisipasyon ou akimile pwen nan klasman nou an. Pi bon yo nan mwa a resevwa prim sipriz.",
+        privacy_title: "KONFIDANSYALITE AK DISCLAIMERS",
+        privacy_disclaimer: "FF ARENA LATAM se yon platfòm endepandan ki òganize tounwa konpetitif. Sit sa a, administratè li yo ak tounwa ki òganize isit la PA afilye, asosye, patwone oswa andose pa Garena oswa Free Fire.",
+        privacy_no_affiliation_title: "Avi sou pa gen afilyasyon",
+        privacy_no_affiliation_p: "Tout mak komèsyal, non jwèt ak logo se pwopriyete pwopriyetè respektif yo.",
+        privacy_about_tournaments_title: "Sou tounwa yo",
+        privacy_about_tournaments_p: "Evènman nou yo se tounwa konpetans (eSports). Patisipan yo peye yon frè enskripsyon ki sèvi pou finanse prim yo ak administrasyon platfòm nan.",
+        privacy_rule_1: "Fwòd oswa itilizasyon hacks ap mennen nan yon entèdiksyon imedya san ranbousman.",
+        privacy_rule_2: "Desizyon administratè yo konsènan rezilta match yo se final.",
+        privacy_rule_3: "Prim yo ap delivre nan yon maksimòm de 48 èdtan apre tounwa a fini.",
+        privacy_data_usage_title: "Itilizasyon Done",
+        privacy_data_usage_p: "Nou sèlman kolekte ID Free Fire ou ak imèl ou pou rezon idantifikasyon nan tounwa yo ak livrezon prim. Nou pa pataje enfòmasyon ou ak twazyèm pati."
     },
     pt: {
+        page_title: "FF ARENA LATAM - Início",
         title: "DOMINE A ARENA",
         hero_p: "Ganhe Passes Booyah e Diamantes toda semana na América Latina.",
         btn_tournaments: "Ver Torneios",
@@ -177,7 +289,6 @@ const translations = {
         recovery_back: "Voltar para o Login",
         register_title: "REGISTRO GUERREIRO",
         register_id_warning: "Certifique-se de que o ID está correto.",
-        register_photo_label: "Foto de Perfil (URL)",
         register_btn: "REGISTRAR-SE",
         register_have_account: "Já tem uma conta?",
         register_login_link: "Entrar",
@@ -185,7 +296,44 @@ const translations = {
         placeholder_password: "Senha",
         placeholder_nickname: "Nome do jogador",
         placeholder_ffid: "ID do Free Fire",
-        placeholder_photo: "URL da sua imagem"
+        placeholder_password_confirm: "Confirmar Senha",
+        error_password_mismatch: "As senhas não coincidem.",
+        tournaments_title: "TORNEIOS ATIVOS",
+        tournaments_loading: "Carregando torneios...",
+        tournaments_enroll: "INSCRIÇÃO",
+        tournaments_price: "Preço:",
+        tournaments_cancel: "CANCELAR",
+        tournaments_btn_enroll: "INSCREVER-SE",
+        tournaments_reward: "Prêmio:",
+        history_title: "CAMPEÕES DA ARENA",
+        history_subtitle: "Lendas que dominaram o campo de batalha.",
+        prizes_title: "RECOMPENSAS DISPONÍVEIS",
+        prizes_subtitle: "Saiba o que você pode ganhar participando dos nossos torneios.",
+        prizes_how_to_win: "Como ganhar?",
+        prizes_how_to_win_p: "Participar é simples, mas ganhar exige habilidade. Aqui explicamos os métodos:",
+        prizes_win_1_title: "1. Vitória Magistral",
+        prizes_win_1_p: "Fique em 1º lugar em torneios Battle Royale ou vença seu duelo 1v1 para levar o prêmio principal do torneio.",
+        prizes_win_2_title: "2. Rei das Kills",
+        prizes_win_2_p: "Em alguns torneios, o jogador com mais eliminações recebe um bônus especial de diamantes.",
+        prizes_booyah: "Passe Booyah Mensual",
+        prizes_booyah_p: "Acesso total às recompensas da temporada atual. Inclui skins, personagens e caixas exclusivas.",
+        prizes_booyah_note: "*Entregue via recarga direta ou cartão-presente.",
+        prizes_diamonds: "Pacote de 500-800 Diamantes",
+        prizes_diamonds_p: "Diamantes diretos na sua conta para você comprar o que quiser na loja oficial.",
+        prizes_diamonds_note: "*A quantidade varia de acordo com o tipo de torneio.",
+        prizes_points: "Pontos de Arena",
+        prizes_points_p: "A cada participação você acumula pontos no nosso ranking. Os melhores do mês recebem prêmios surpresa.",
+        privacy_title: "PRIVACIDADE E ISENÇÕES DE RESPONSABILIDADE",
+        privacy_disclaimer: "FF ARENA LATAM é uma plataforma independiente de organización de torneos competitivos. Este sitio, sus administradores y los torneos organizados aquí NO están afiliados, asociados, patrocinados o endosados pela Garena o Free Fire.",
+        privacy_no_affiliation_title: "Aviso de Não Afiliação",
+        privacy_no_affiliation_p: "Todas as marcas comerciais, nomes de jogos e logotipos são de propriedade de seus respectivos donos.",
+        privacy_about_tournaments_title: "Sobre os Torneios",
+        privacy_about_tournaments_p: "Nossos eventos são torneios de habilidade (eSports). Os participantes pagam uma taxa de inscrição que é usada para financiar os prêmios e a administração da plataforma.",
+        privacy_rule_1: "Fraude ou uso de hacks resultará em banimento imediato sem reembolso.",
+        privacy_rule_2: "As decisões dos administradores em relação aos resultados das partidas são finais.",
+        privacy_rule_3: "Os prêmios são entregues em um prazo máximo de 48 horas após o término do torneio.",
+        privacy_data_usage_title: "Uso de Dados",
+        privacy_data_usage_p: "Apenas coletamos seu ID do Free Fire e e-mail para fins de identificação nos torneios e entrega de prêmios. Não compartilhamos suas informações com terceiros."
     }
 };
 
@@ -194,12 +342,13 @@ async function detectLanguage() {
         const response = await fetch('https://ipapi.co/json/');
         const data = await response.json();
         const country = data.country_code;
+        const languages = data.languages ? data.languages.split(',') : [];
         localStorage.setItem('user_country', data.country_name);
 
         if (country === 'BR') return 'pt';
-        if (country === 'HT') return 'ht'; // Or 'fr' if preferred, but user mentioned both. Let's default HT to ht.
-        // For other French speaking regions or preference, we might need a selector.
-        // But for now, let's map countries.
+        if (country === 'HT') return 'ht';
+        if (languages.some(l => l.startsWith('fr'))) return 'fr';
+
         return 'es';
     } catch (e) {
         console.error("Error detecting country:", e);
@@ -235,15 +384,16 @@ async function applyTranslations() {
         'btn-view-prizes': 'btn_prizes',
         'btn-view-history': 'btn_history',
         'card-prizes-title': 'card_prizes_title',
-        'card-prizes-p': 'card_prizes_p',
+        'card-prizes-text': 'card_prizes_p',
         'card-prizes-link': 'card_prizes_link',
         'card-vote-title': 'card_vote_title',
         'card-vote-p': 'card_vote_p',
         'card-community-title': 'card_community_title',
-        'card-community-p': 'card_community_p',
+        'card-community-text': 'card_community_p',
         'card-community-link': 'card_community_link',
         'footer-copy': 'footer_copy',
         'footer-privacy': 'footer_privacy',
+        'page-title': 'page_title',
         // Auth page
         'login-title-h2': 'login_title',
         'login-btn-submit': 'login_btn',
@@ -255,22 +405,55 @@ async function applyTranslations() {
         'show-login-2': 'recovery_back',
         'register-title-h2': 'register_title',
         'register-id-warning-small': 'register_id_warning',
-        'register-photo-label-text': 'register_photo_label',
         'register-btn-submit': 'register_btn',
         'register-have-account-text': 'register_have_account',
-        'show-login': 'register_login_link'
+        'show-login': 'register_login_link',
+        'tournaments-title-h2': 'tournaments_title',
+        'tournaments-loading-p': 'tournaments_loading',
+        'enroll-title-h2': 'tournaments_enroll',
+        'price-label': 'tournaments_price',
+        'btn-cancel-enroll': 'tournaments_cancel',
+        'history-title-h2': 'history_title',
+        'history-subtitle-p': 'history_subtitle',
+        'prizes-title-h2': 'prizes_title',
+        'prizes-subtitle-p': 'prizes_subtitle',
+        'how-to-win-h2': 'prizes_how_to_win',
+        'how-to-win-p': 'prizes_how_to_win_p',
+        'win-1-title': 'prizes_win_1_title',
+        'win-1-p': 'prizes_win_1_p',
+        'win-2-title': 'prizes_win_2_title',
+        'win-2-p': 'prizes_win_2_p',
+        'booyah-title-h3': 'prizes_booyah',
+        'booyah-p': 'prizes_booyah_p',
+        'booyah-note': 'prizes_booyah_note',
+        'diamonds-title-h3': 'prizes_diamonds',
+        'diamonds-p': 'prizes_diamonds_p',
+        'diamonds-note': 'prizes_diamonds_note',
+        'points-title-h3': 'prizes_points',
+        'points-p': 'prizes_points_p',
+        'privacy-title-h1': 'privacy_title',
+        'privacy-disclaimer-p': 'privacy_disclaimer',
+        'no-affiliation-title': 'privacy_no_affiliation_title',
+        'no-affiliation-p': 'privacy_no_affiliation_p',
+        'about-tournaments-title': 'privacy_about_tournaments_title',
+        'about-tournaments-p': 'privacy_about_tournaments_p',
+        'rule-1-li': 'privacy_rule_1',
+        'rule-2-li': 'privacy_rule_2',
+        'rule-3-li': 'privacy_rule_3',
+        'data-usage-title': 'privacy_data_usage_title',
+        'data-usage-p': 'privacy_data_usage_p'
     };
 
     for (const [id, key] of Object.entries(elements)) {
         const el = document.getElementById(id);
         if (el) {
-            if (el.tagName === 'INPUT' && el.placeholder) {
-                // Handled separately below for placeholders
-            } else {
-                // If it's a link with nested text or something, be careful.
-                // But mostly these are simple.
-                if (key.includes('link') || key.includes('text') || key.includes('btn') || key.includes('title') || key.includes('p') || key.includes('nav') || key.includes('copy') || key.includes('privacy') || key.includes('warning') || key.includes('label')) {
-                     el.innerText = t[key] || el.innerText;
+            if (t[key]) {
+                if (el.tagName === 'INPUT') {
+                    // Handled separately for placeholders
+                } else if (id === 'page-title') {
+                    document.title = t[key];
+                } else {
+                    el.innerText = t[key];
                 }
             }
         }
@@ -285,8 +468,8 @@ async function applyTranslations() {
         'reg-email': 'placeholder_email',
         'reg-nickname': 'placeholder_nickname',
         'reg-ffid': 'placeholder_ffid',
-        'reg-foto': 'placeholder_photo',
-        'reg-password': 'placeholder_password'
+        'reg-password': 'placeholder_password',
+        'reg-password-confirm': 'placeholder_password_confirm'
     };
 
     for (const [id, key] of Object.entries(placeholders)) {
