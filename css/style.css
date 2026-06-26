@@ -83,14 +83,36 @@ nav a:hover {
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
 }
 
+/* Glassmorphism */
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .hero {
-    height: 60vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: linear-gradient(to bottom, rgba(255,0,0,0.1), transparent);
+    background: radial-gradient(circle at center, rgba(255,0,0,0.15) 0%, transparent 70%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+    opacity: 0.1;
+    z-index: -1;
 }
 
 .hero h1 {
@@ -108,6 +130,12 @@ nav a:hover {
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 .grid {
@@ -152,4 +180,46 @@ td {
 
 .hidden {
     display: none;
+}
+
+/* Toast Notifications */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    background: rgba(20, 20, 20, 0.95);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 250px;
+    border-left: 5px solid var(--primary);
+    animation: slideIn 0.3s ease-out forwards;
+    backdrop-filter: blur(10px);
+}
+
+.toast.success {
+    border-left-color: #00ff00;
+}
+
+.toast.error {
+    border-left-color: #ff0000;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
 }

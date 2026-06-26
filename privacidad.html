@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacidad y Reglas - FF ARENA RD</title>
+    <title id="page-title">Privacidad y Reglas - FF ARENA LATAM</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="logo">FF <span>ARENA</span> RD</div>
+            <div class="logo">FF <span>ARENA</span> LATAM</div>
             <nav id="main-nav">
                 <a href="index.html">Inicio</a>
                 <a href="torneos.html">Torneos</a>
@@ -24,7 +24,7 @@
 
             <div class="card">
                 <h2 style="margin-bottom: 15px;">Aviso de No Afiliación</h2>
-                <p><strong>FF ARENA RD</strong> es una plataforma independiente de organización de torneos competitivos. Este sitio, sus administradores y los torneos organizados aquí <strong>NO están afiliados, asociados, patrocinados ni respaldados por Garena ni Free Fire.</strong></p>
+                <p><strong>FF ARENA LATAM</strong> es una plataforma independiente de organización de torneos competitivos. Este sitio, sus administradores y los torneos organizados aquí <strong>NO están afiliados, asociados, patrocinados ni respaldados por Garena ni Free Fire.</strong></p>
                 <p style="margin-top: 10px;">Todas las marcas comerciales, nombres de juegos y logotipos son propiedad de sus respectivos dueños.</p>
             </div>
 
@@ -32,9 +32,11 @@
                 <h2 style="margin-bottom: 15px;">Sobre los Torneos</h2>
                 <p>Nuestros eventos son torneos de habilidad (eSports). Los participantes pagan una cuota de inscripción que se utiliza para financiar los premios y la administración de la plataforma.</p>
                 <ul style="margin-left: 20px; margin-top: 15px; color: var(--text-dim);">
-                    <li>El fraude o uso de hacks resultará en baneo inmediato sin reembolso.</li>
-                    <li>Las decisiones de los administradores en cuanto a resultados de partidas son finales.</li>
-                    <li>Los premios se entregan en un plazo máximo de 48 horas tras finalizar el torneo.</li>
+                    <li id="rule-1-li">El fraude o uso de hacks resultará en baneo inmediato sin reembolso.</li>
+                    <li id="rule-2-li">Las decisiones de los administradores en cuanto a resultados de partidas son finales.</li>
+                    <li id="rule-3-li">Los premios se entregan en un plazo máximo de 48 horas tras finalizar el torneo.</li>
+                    <li id="rule-4-li">Los puntos del ranking se reinician el primer día de cada mes.</li>
+                    <li id="rule-5-li">Los torneos se celebran los domingos a las 3 PM. Emparejamientos visibles desde las 12 PM.</li>
                 </ul>
             </div>
 
@@ -49,11 +51,13 @@
         </section>
 
         <footer style="margin-top: 100px; padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: #555;">
-            <p>© 2024 FF ARENA RD - TORNEOS NO OFICIALES</p>
+            <p>© 2024 FF ARENA LATAM - TORNEOS NO OFICIALES</p>
         </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/translations.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

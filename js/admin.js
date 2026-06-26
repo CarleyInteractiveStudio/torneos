@@ -1,8 +1,24 @@
-// CONFIGURACIÓN - REEMPLAZA CON TUS DATOS
-const SUPABASE_URL = 'TU_URL_DE_SUPABASE';
-const SUPABASE_KEY = 'TU_LLAVE_ANON_DE_SUPABASE';
+// Sistema de Notificaciones (Toasts)
+function showToast(message, type = 'success') {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    }
 
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const icon = type === 'success' ? '✅' : '❌';
+    toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s ease-in forwards';
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
 
 async function checkAdmin() {
     const { data: { user } } = await sb.auth.getUser();
@@ -27,12 +43,12 @@ document.getElementById('create-tournament-form')?.addEventListener('submit', as
     const premio = document.getElementById('t-premio').value;
 
     await sb.from('torneos').insert({ titulo, tipo, precio_inscripcion: precio, premio_descripcion: premio, estado: 'abierto' });
-    alert("Torneo creado!");
-    location.reload();
+    showToast("Torneo creado!");
+    setTimeout(() => location.reload(), 1500);
 });
 
 async function loadPendingPayments() {
-    const { data } = await sb.from('participantes').select('*, perfiles(nickname, ff_id), torneos(titulo)').eq('estado_pago', 'pendiente');
+    const { data } = await sb.from('participantes').select('*, perfiles(nickname, ff_id), torneos(titulo)').in('estado_pago', ['pendiente', 'solicitado_admin']);
     const table = document.getElementById('pending-payments');
     if (!table) return;
     table.innerHTML = data.map(p => `
@@ -40,7 +56,12 @@ async function loadPendingPayments() {
             <td>${p.perfiles.nickname}</td>
             <td>${p.perfiles.ff_id}</td>
             <td>${p.torneos.titulo}</td>
-            <td><button onclick="approvePayment('${p.id}')" class="btn btn-primary">OK</button></td>
+            <td>
+                <span style="font-size:10px; color:${p.estado_pago === 'solicitado_admin' ? 'orange' : '#888'}; display:block; margin-bottom:5px;">
+                    ${p.estado_pago === 'solicitado_admin' ? 'SOLICITUD MANUAL' : 'PAYPAL PENDIENTE'}
+                </span>
+                <button onclick="approvePayment('${p.id}')" class="btn btn-primary">OK</button>
+            </td>
         </tr>
     `).join('');
 }
@@ -100,8 +121,36 @@ window.addKill = async (partId, currentKills, userId) => {
 window.finalizeTournament = async (torneoId) => {
     if (confirm("¿Estás seguro de finalizar este torneo? Ya no se podrán sumar más kills y pasará al historial.")) {
         await sb.from('torneos').update({ estado: 'finalizado' }).eq('id', torneoId);
-        alert("Torneo finalizado con éxito.");
-        location.reload();
+        showToast("Torneo finalizado con éxito.");
+        setTimeout(() => location.reload(), 1500);
+    }
+};
+
+window.handleSeasonReset = async () => {
+    if (!confirm("¿Seguro que quieres reiniciar la temporada? Los puntos de todos los jugadores volverán a 0.")) return;
+
+    const now = new Date();
+    const mesAnio = `${now.getMonth() + 1}-${now.getFullYear()}`;
+
+    // 1. Obtener ranking actual
+    const { data: ranking } = await sb.from('perfiles').select('id, puntos_totales').order('puntos_totales', { ascending: false });
+
+    if (ranking) {
+        // 2. Guardar en historial
+        const historyData = ranking.map((p, index) => ({
+            mes_anio: mesAnio,
+            perfil_id: p.id,
+            puntos_acumulados: p.puntos_totales,
+            posicion: index + 1
+        }));
+
+        await sb.from('historial_temporadas').insert(historyData);
+
+        // 3. Resetear puntos
+        await sb.from('perfiles').update({ puntos_totales: 0 }).neq('id', '00000000-0000-0000-0000-000000000000');
+
+        showToast("Temporada reiniciada y guardada con éxito.");
+        setTimeout(() => location.reload(), 1500);
     }
 };
 
