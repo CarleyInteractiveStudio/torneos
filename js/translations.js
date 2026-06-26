@@ -2,7 +2,8 @@ const translations = {
     es: {
         page_title: "FF ARENA LATAM - Inicio",
         title: "DOMINA LA ARENA",
-        hero_p: "Gana Pases Booyah y Diamantes cada semana en Latinoamérica.",
+        hero_p: "Alistate para el torneo, derrota a tus oponentes y ganate el pase booya o 500 diamantes.",
+        btn_enroll: "ALISTATE",
         btn_tournaments: "Ver Torneos",
         btn_prizes: "Ver Premios",
         btn_history: "Historial",
@@ -27,6 +28,8 @@ const translations = {
         profile_points: "Puntos",
         footer_copy: "© 2024 FF ARENA LATAM - TORNEOS NO OFICIALES",
         footer_privacy: "Privacidad y Reglas",
+        support_title: "Soporte y Reclamos",
+        support_label: "Soporte y Reclamos",
         login_title: "INICIAR SESIÓN",
         login_btn: "ENTRAR",
         login_no_account: "¿No tienes cuenta?",
@@ -75,18 +78,21 @@ const translations = {
         privacy_disclaimer: "FF ARENA LATAM es una plataforma independiente de organización de torneos competitivos. Este sitio, sus administradores y los torneos organizados aquí NO están afiliados, asociados, patrocinados ni respaldados por Garena ni Free Fire.",
         privacy_no_affiliation_title: "Aviso de No Afiliación",
         privacy_no_affiliation_p: "Todas las marcas comerciales, nombres de juegos y logotipos son propiedad de sus respectivos dueños.",
-        privacy_about_tournaments_title: "Sobre los Torneos",
+        privacy_about_tournaments_title: "Sobre los Torneios",
         privacy_about_tournaments_p: "Nuestros eventos son torneos de habilidad (eSports). Los participantes pagan una cuota de inscripción que se utiliza para financiar los premios y la administración de la plataforma.",
         privacy_rule_1: "El fraude o uso de hacks resultará en baneo inmediato sin reembolso.",
         privacy_rule_2: "Las decisiones de los administradores en cuanto a resultados de partidas son finales.",
         privacy_rule_3: "Los premios se entregan en un plazo máximo de 48 horas tras finalizar el torneo.",
+        privacy_rule_4: "Los puntos del ranking se reinician el primer día de cada mes.",
+        privacy_rule_5: "Los torneos se celebran los domingos a las 3 PM. Emparejamientos visibles desde las 12 PM.",
         privacy_data_usage_title: "Uso de Datos",
         privacy_data_usage_p: "Solo recolectamos tu ID de Free Fire y correo electrónico para fines de identificación en los torneos y entrega de premios. No compartimos tu información con terceros."
     },
     fr: {
         page_title: "FF ARENA LATAM - Accueil",
         title: "DOMINEZ L'ARÈNE",
-        hero_p: "Gagnez des Pass Booyah et des Diamants chaque semaine en Amérique Latine.",
+        hero_p: "Inscrivez-vous au tournoi, battez vos adversaires et gagnez le pass booya ou 500 diamants.",
+        btn_enroll: "S'INSCRIRE",
         btn_tournaments: "Voir les Tournois",
         btn_prizes: "Voir les Prix",
         btn_history: "Historique",
@@ -111,6 +117,8 @@ const translations = {
         profile_points: "Points",
         footer_copy: "© 2024 FF ARENA LATAM - TOURNOIS NON OFFICIELS",
         footer_privacy: "Confidentialité et Règles",
+        support_title: "Support et Réclamations",
+        support_label: "Support et Réclamations",
         login_title: "SE CONNECTER",
         login_btn: "ENTRER",
         login_no_account: "Vous n'avez pas de compte ?",
@@ -164,13 +172,16 @@ const translations = {
         privacy_rule_1: "La fraude ou l'utilisation de hacks entraînera un bannissement immédiat sans remboursement.",
         privacy_rule_2: "Les décisions des administrateurs concernant les résultats des matchs sont finales.",
         privacy_rule_3: "Les prix sont livrés dans un délai maximum de 48 heures après la fin du tournoi.",
+        privacy_rule_4: "Les points du classement sont réinitialisés le premier jour de chaque mois.",
+        privacy_rule_5: "Les tournois ont lieu le dimanche à 15h. Appariements visibles dès 12h.",
         privacy_data_usage_title: "Utilisation des données",
         privacy_data_usage_p: "Nous ne collectons votre ID Free Fire et votre e-mail qu'à des fins d'identification dans les tournois et pour la remise des prix. Nous ne partageons pas vos informations avec des tiers."
     },
     ht: {
         page_title: "FF ARENA LATAM - Akèy",
         title: "DOMINE AREN AN",
-        hero_p: "Ganyen Pass Booyah ak Diaman chak semèn nan Amerik Latin nan.",
+        hero_p: "Enskri pou tounwa a, bat opozan ou yo epi ganyen pase booya oswa 500 dyaman.",
+        btn_enroll: "ENSRKI",
         btn_tournaments: "Gade Tounwa yo",
         btn_prizes: "Gade Prim yo",
         btn_history: "Istwa",
@@ -195,6 +206,8 @@ const translations = {
         profile_points: "Pwen",
         footer_copy: "© 2024 FF ARENA LATAM - TOUNWA KI PA OFISYÈL",
         footer_privacy: "Konfidansyalite ak Règleman",
+        support_title: "Sipò ak Reklamasyon",
+        support_label: "Sipò ak Reklamasyon",
         login_title: "KONEKTE",
         login_btn: "ANTRE",
         login_no_account: "Ou pa gen kont?",
@@ -248,13 +261,16 @@ const translations = {
         privacy_rule_1: "Fwòd oswa itilizasyon hacks ap mennen nan yon entèdiksyon imedya san ranbousman.",
         privacy_rule_2: "Desizyon administratè yo konsènan rezilta match yo se final.",
         privacy_rule_3: "Prim yo ap delivre nan yon maksimòm de 48 èdtan apre tounwa a fini.",
+        privacy_rule_4: "Pwen klasman yo pral rekòmanse nan premye jou chak mwa.",
+        privacy_rule_5: "Tounwa yo fèt chak dimanch a 3 PM. Match yo vizib depi 12 PM.",
         privacy_data_usage_title: "Itilizasyon Done",
         privacy_data_usage_p: "Nou sèlman kolekte ID Free Fire ou ak imèl ou pou rezon idantifikasyon nan tounwa yo ak livrezon prim. Nou pa pataje enfòmasyon ou ak twazyèm pati."
     },
     pt: {
         page_title: "FF ARENA LATAM - Início",
         title: "DOMINE A ARENA",
-        hero_p: "Ganhe Passes Booyah e Diamantes toda semana na América Latina.",
+        hero_p: "Increva-se no torneio, derrote seus oponentes e ganhe o passe booya ou 500 diamantes.",
+        btn_enroll: "INSCREVER-SE",
         btn_tournaments: "Ver Torneios",
         btn_prizes: "Ver Prêmios",
         btn_history: "Histórico",
@@ -264,7 +280,7 @@ const translations = {
         card_vote_title: "VOTAÇÃO",
         card_vote_p: "Você escolhe: Duelo 1v1 ou Battle Royale? Vote toda semana no seu perfil.",
         card_community_title: "COMUNIDADE LATAM",
-        card_community_p: "O melhor nível da América Latina.",
+        card_community_p: "O mejor nível da América Latina.",
         card_community_link: "Ver campeões →",
         nav_home: "Início",
         nav_tournaments: "Torneios",
@@ -279,6 +295,8 @@ const translations = {
         profile_points: "Pontos",
         footer_copy: "© 2024 FF ARENA LATAM - TORNEIOS NÃO OFICIAIS",
         footer_privacy: "Privacidade e Regras",
+        support_title: "Suporte e Reclamações",
+        support_label: "Suporte e Reclamações",
         login_title: "ENTRAR",
         login_btn: "ENTRAR",
         login_no_account: "Não tem conta?",
@@ -294,7 +312,7 @@ const translations = {
         register_login_link: "Entrar",
         placeholder_email: "E-mail",
         placeholder_password: "Senha",
-        placeholder_nickname: "Nome do jogador",
+        placeholder_nickname: "Nome do jugador",
         placeholder_ffid: "ID do Free Fire",
         placeholder_password_confirm: "Confirmar Senha",
         error_password_mismatch: "As senhas não coincidem.",
@@ -308,14 +326,14 @@ const translations = {
         history_title: "CAMPEÕES DA ARENA",
         history_subtitle: "Lendas que dominaram o campo de batalha.",
         prizes_title: "RECOMPENSAS DISPONÍVEIS",
-        prizes_subtitle: "Saiba o que você pode ganhar participando dos nossos torneios.",
+        prizes_subtitle: "Saiba o que você pode ganar participando dos nossos torneios.",
         prizes_how_to_win: "Como ganhar?",
         prizes_how_to_win_p: "Participar é simples, mas ganhar exige habilidade. Aqui explicamos os métodos:",
         prizes_win_1_title: "1. Vitória Magistral",
         prizes_win_1_p: "Fique em 1º lugar em torneios Battle Royale ou vença seu duelo 1v1 para levar o prêmio principal do torneio.",
         prizes_win_2_title: "2. Rei das Kills",
         prizes_win_2_p: "Em alguns torneios, o jogador com mais eliminações recebe um bônus especial de diamantes.",
-        prizes_booyah: "Passe Booyah Mensual",
+        prizes_booyah: "Pase Booyah Mensual",
         prizes_booyah_p: "Acesso total às recompensas da temporada atual. Inclui skins, personagens e caixas exclusivas.",
         prizes_booyah_note: "*Entregue via recarga direta ou cartão-presente.",
         prizes_diamonds: "Pacote de 500-800 Diamantes",
@@ -324,7 +342,7 @@ const translations = {
         prizes_points: "Pontos de Arena",
         prizes_points_p: "A cada participação você acumula pontos no nosso ranking. Os melhores do mês recebem prêmios surpresa.",
         privacy_title: "PRIVACIDADE E ISENÇÕES DE RESPONSABILIDADE",
-        privacy_disclaimer: "FF ARENA LATAM é uma plataforma independiente de organización de torneos competitivos. Este sitio, sus administradores y los torneos organizados aquí NO están afiliados, asociados, patrocinados o endosados pela Garena o Free Fire.",
+        privacy_disclaimer: "FF ARENA LATAM é uma plataforma independiente de organización de torneos competitivos. Este sitio, sus administradores y los torneios organizados aqui NÃO são afiliados, associados, patrocinados ou endossados pela Garena ou Free Fire.",
         privacy_no_affiliation_title: "Aviso de Não Afiliação",
         privacy_no_affiliation_p: "Todas as marcas comerciais, nomes de jogos e logotipos são de propriedade de seus respectivos donos.",
         privacy_about_tournaments_title: "Sobre os Torneios",
@@ -332,6 +350,8 @@ const translations = {
         privacy_rule_1: "Fraude ou uso de hacks resultará em banimento imediato sem reembolso.",
         privacy_rule_2: "As decisões dos administradores em relação aos resultados das partidas são finais.",
         privacy_rule_3: "Os prêmios são entregues em um prazo máximo de 48 horas após o término do torneio.",
+        privacy_rule_4: "Os pontos do ranking são reiniciados no primeiro dia de cada mês.",
+        privacy_rule_5: "Os torneios são realizados aos domingos às 15h. Emparelhamentos visíveis a partir das 12h.",
         privacy_data_usage_title: "Uso de Dados",
         privacy_data_usage_p: "Apenas coletamos seu ID do Free Fire e e-mail para fins de identificação nos torneios e entrega de prêmios. Não compartilhamos suas informações com terceiros."
     }
@@ -378,8 +398,13 @@ async function applyTranslations() {
         'th-pos': 'profile_pos',
         'th-warrior': 'profile_warrior',
         'th-points': 'profile_points',
+        'slots-title': 'tournaments_title',
+        'support-title': 'support_title',
+        'support-label': 'support_label',
+        'btn-support-submit': 'login_btn',
         'hero-title': 'title',
         'hero-p': 'hero_p',
+        'btn-enroll-hero': 'btn_enroll',
         'btn-view-tournaments': 'btn_tournaments',
         'btn-view-prizes': 'btn_prizes',
         'btn-view-history': 'btn_history',
@@ -440,6 +465,8 @@ async function applyTranslations() {
         'rule-1-li': 'privacy_rule_1',
         'rule-2-li': 'privacy_rule_2',
         'rule-3-li': 'privacy_rule_3',
+        'rule-4-li': 'privacy_rule_4',
+        'rule-5-li': 'privacy_rule_5',
         'data-usage-title': 'privacy_data_usage_title',
         'data-usage-p': 'privacy_data_usage_p'
     };
@@ -469,12 +496,18 @@ async function applyTranslations() {
         'reg-nickname': 'placeholder_nickname',
         'reg-ffid': 'placeholder_ffid',
         'reg-password': 'placeholder_password',
-        'reg-password-confirm': 'placeholder_password_confirm'
+        'reg-password-confirm': 'placeholder_password_confirm',
+        'sup-asunto': 'history_subtitle', // Reusing keys or adding new ones
+        'sup-mensaje': 'prizes_subtitle'
     };
 
     for (const [id, key] of Object.entries(placeholders)) {
         const el = document.getElementById(id);
-        if (el) el.placeholder = t[key] || el.placeholder;
+        if (el) {
+            if (id === 'sup-asunto') el.placeholder = (lang === 'es' ? 'Asunto' : (lang === 'fr' ? 'Sujet' : (lang === 'ht' ? 'Sijè' : 'Assunto')));
+            else if (id === 'sup-mensaje') el.placeholder = (lang === 'es' ? 'Tu mensaje...' : (lang === 'fr' ? 'Votre message...' : (lang === 'ht' ? 'Mesaj ou...' : 'Sua mensagem...')));
+            else el.placeholder = t[key] || el.placeholder;
+        }
     }
 }
 

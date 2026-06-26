@@ -1,9 +1,3 @@
-// CONFIGURACIÓN - REEMPLAZA CON TUS DATOS
-const SUPABASE_URL = 'TU_URL_DE_SUPABASE';
-const SUPABASE_KEY = 'TU_LLAVE_ANON_DE_SUPABASE';
-
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
 async function checkAdmin() {
     const { data: { user } } = await sb.auth.getUser();
     if (!user) window.location.href = 'auth.html';
@@ -101,6 +95,34 @@ window.finalizeTournament = async (torneoId) => {
     if (confirm("¿Estás seguro de finalizar este torneo? Ya no se podrán sumar más kills y pasará al historial.")) {
         await sb.from('torneos').update({ estado: 'finalizado' }).eq('id', torneoId);
         alert("Torneo finalizado con éxito.");
+        location.reload();
+    }
+};
+
+window.handleSeasonReset = async () => {
+    if (!confirm("¿Seguro que quieres reiniciar la temporada? Los puntos de todos los jugadores volverán a 0.")) return;
+
+    const now = new Date();
+    const mesAnio = `${now.getMonth() + 1}-${now.getFullYear()}`;
+
+    // 1. Obtener ranking actual
+    const { data: ranking } = await sb.from('perfiles').select('id, puntos_totales').order('puntos_totales', { ascending: false });
+
+    if (ranking) {
+        // 2. Guardar en historial
+        const historyData = ranking.map((p, index) => ({
+            mes_anio: mesAnio,
+            perfil_id: p.id,
+            puntos_acumulados: p.puntos_totales,
+            posicion: index + 1
+        }));
+
+        await sb.from('historial_temporadas').insert(historyData);
+
+        // 3. Resetear puntos
+        await sb.from('perfiles').update({ puntos_totales: 0 }).neq('id', '00000000-0000-0000-0000-000000000000');
+
+        alert("Temporada reiniciada y guardada con éxito.");
         location.reload();
     }
 };

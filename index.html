@@ -21,12 +21,21 @@
 
         <section class="hero">
             <h1 id="hero-title">DOMINA LA ARENA</h1>
-            <p id="hero-p" style="color: #a0a0a0; font-size: 20px; margin-bottom: 30px;">Gana Pases Booyah y Diamantes cada semana en Latinoamérica.</p>
+            <p id="hero-p" style="color: #a0a0a0; font-size: 20px; margin-bottom: 30px;">Alistate para el torneo, derrota a tus oponentes y ganate el pase booya o 500 diamantes.</p>
             <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-                <a href="torneos.html" id="btn-view-tournaments" class="btn btn-primary">Ver Torneos</a>
+                <a href="torneos.html" id="btn-enroll-hero" class="btn btn-primary">ALISTATE</a>
                 <a href="recompensas.html" id="btn-view-prizes" class="btn" style="background: #e6b400; color: black;">Ver Premios</a>
                 <a href="historial.html" id="btn-view-history" class="btn" style="background: #333; color: white;">Historial</a>
             </div>
+        </section>
+
+        <!-- Sección de Cupos del Torneo -->
+        <section id="tournament-slots-section" class="card glass" style="margin-top: 40px; text-align: center; border: 1px solid rgba(255,0,0,0.3);">
+            <h2 id="slots-title" style="letter-spacing: 2px; font-style: italic;">CUPOS DISPONIBLES</h2>
+            <div id="slots-container" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 30px 0; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px;">
+                <!-- Aquí se generarán los 50 cuadritos -->
+            </div>
+            <p id="slots-info" style="font-size: 14px; color: #aaa; font-weight: bold;"></p>
         </section>
 
         <div class="grid">
@@ -44,6 +53,43 @@
             </div>
         </div>
 
+        <!-- YouTube Widget y Botón de Soporte -->
+        <div id="youtube-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+            <div id="yt-bubble" style="width: 60px; height: 60px; background: #ff0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.5); position: relative;">
+                <span style="color: white; font-size: 24px;">▶</span>
+                <div id="yt-status" class="hidden" style="position: absolute; top: -5px; right: -5px; background: green; color: white; font-size: 10px; padding: 2px 5px; border-radius: 10px; font-weight: bold;">LIVE</div>
+            </div>
+            <div id="yt-content" class="hidden card glass" style="position: absolute; bottom: 70px; right: 0; width: 320px; padding: 0; overflow: hidden; border: 1px solid rgba(255,0,0,0.5); box-shadow: 0 0 30px rgba(255,0,0,0.2);">
+                <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,0,0,0.1);">
+                    <h4 id="yt-title" style="font-size: 14px; margin: 0;">Nuestro Canal</h4>
+                </div>
+                <div style="padding: 15px;">
+                    <div id="yt-video-container" style="background: #000; aspect-ratio: 16/9; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; border-radius: 8px; overflow: hidden; border: 1px solid #333;">
+                        <p style="font-size: 12px; color: #666;">Cargando video...</p>
+                    </div>
+                    <a href="https://www.youtube.com/@They-Black-King" target="_blank" class="btn btn-primary" style="width: 100%; font-size: 12px; border-radius: 8px;">SÍGUENOS EN YOUTUBE</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="support-widget" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000;">
+            <button onclick="toggleSupport()" class="btn" style="background: #333; color: white; border-radius: 50px; display: flex; align-items: center; gap: 10px;">
+                <span>💬</span> <span id="support-label">Soporte y Reclamos</span>
+            </button>
+            <div id="support-modal" class="hidden card glass" style="position: absolute; bottom: 60px; left: 0; width: 320px; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
+                <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);">
+                    <h3 id="support-title" style="font-size: 16px; margin: 0;">Soporte y Reclamos</h3>
+                </div>
+                <div style="padding: 20px;">
+                    <form id="support-form">
+                        <input type="text" id="sup-asunto" placeholder="Asunto" style="background: rgba(0,0,0,0.5); border-radius: 8px;" required>
+                        <textarea id="sup-mensaje" placeholder="Tu mensaje..." style="height: 100px; background: rgba(0,0,0,0.5); border-radius: 8px;" required></textarea>
+                        <button type="submit" id="btn-support-submit" class="btn btn-primary" style="width: 100%; border-radius: 8px;">ENVIAR</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <footer style="margin-top: 100px; padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: #555;">
             <p id="footer-copy">© 2024 FF ARENA LATAM - TORNEOS NO OFICIALES</p>
             <div style="margin-top: 15px;">
@@ -55,6 +101,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/translations.js"></script>
     <script src="js/config.js"></script>
+    <script src="js/finance.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

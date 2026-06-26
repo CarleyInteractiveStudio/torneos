@@ -21,6 +21,8 @@ CREATE TABLE torneos (
   estado TEXT DEFAULT 'votacion',
   precio_inscripcion DECIMAL DEFAULT 0.00,
   premio_descripcion TEXT,
+  max_participantes INTEGER DEFAULT 50,
+  link_youtube_live TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
@@ -46,14 +48,38 @@ CREATE TABLE votos (
   UNIQUE(perfil_id, semana_inicio)
 );
 
+-- 5. Mensajes de Soporte
+CREATE TABLE mensajes_soporte (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  perfil_id UUID REFERENCES perfiles(id) ON DELETE CASCADE,
+  mensaje TEXT NOT NULL,
+  asunto TEXT,
+  leido BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 6. Historial de Temporadas
+CREATE TABLE historial_temporadas (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  mes_anio TEXT NOT NULL,
+  perfil_id UUID REFERENCES perfiles(id) ON DELETE CASCADE,
+  puntos_acumulados INTEGER NOT NULL,
+  posicion INTEGER,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- RLS (Habilita Row Level Security y añade las políticas en el dashboard de Supabase)
 ALTER TABLE perfiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE torneos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE participantes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE votos ENABLE ROW LEVEL SECURITY;
+ALTER TABLE mensajes_soporte ENABLE ROW LEVEL SECURITY;
+ALTER TABLE historial_temporadas ENABLE ROW LEVEL SECURITY;
 
 -- Políticas Sugeridas:
 -- Perfiles: Lectura todos, Inserción auth.uid() = id.
 -- Torneos: Lectura todos, Escritura solo admin.
 -- Participantes: Lectura todos, Inserción auth.uid() = perfil_id.
 -- Votos: Lectura todos, Upsert auth.uid() = perfil_id.
+-- Soporte: Inserción auth.uid() = perfil_id, Lectura solo admin y el creador.
+-- Historial: Lectura todos.
