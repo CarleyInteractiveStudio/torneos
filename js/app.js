@@ -102,7 +102,8 @@ async function setupYouTubeWidget() {
     const content = document.getElementById('yt-content');
     if (!bubble) return;
 
-    bubble.onclick = () => content.classList.toggle('hidden');
+    window.toggleYouTube = () => content.classList.toggle('hidden');
+    bubble.onclick = toggleYouTube;
 
     // Aquí normalmente usarías la API de YouTube, pero como no tengo tu API Key,
     // buscaré si hay un link de live en el torneo actual
@@ -133,15 +134,23 @@ async function loadTournaments() {
     if (!container) return;
     container.innerHTML = '';
 
-    data?.forEach(t => {
+    const lang = localStorage.getItem('preferred_lang') || 'es';
+    const t_dict = (typeof translations !== 'undefined') ? translations[lang] : null;
+
+    data?.forEach(async (t) => {
         const div = document.createElement('div');
-        div.className = 'card';
+        div.className = 'card glass';
+        const label_reward = t_dict ? t_dict.tournaments_reward : 'Premio:';
+        const label_btn = t_dict ? t_dict.tournaments_btn_enroll : 'INSCRIBIRSE';
+
+        const finance = await calculateTotalUSD(100);
+
         div.innerHTML = `
             <div style="background: red; color: white; padding: 4px 10px; font-size: 10px; font-weight: bold; display: inline-block; border-radius: 4px; margin-bottom: 10px;">${t.tipo.toUpperCase()}</div>
             <h3 style="margin-bottom: 10px;">${t.titulo}</h3>
-            <p style="color: #aaa; font-size: 14px;">Premio: ${t.premio_descripcion}</p>
-            <p style="font-weight: bold; margin: 15px 0; font-size: 18px; color: #fff;">$${t.precio_inscripcion} USD</p>
-            <button onclick="openPayModal('${t.id}', '${t.titulo}', ${t.precio_inscripcion})" class="btn btn-primary" style="width: 100%;">INSCRIBIRSE</button>
+            <p style="color: #aaa; font-size: 14px;">${label_reward} ${t.premio_descripcion}</p>
+            <p style="font-weight: bold; margin: 15px 0; font-size: 22px; color: #fff;">100 DOP <span style="font-size: 14px; color: #888;">($${finance.totalUSD} USD)</span></p>
+            <button onclick="openPayModal('${t.id}', '${t.titulo}', 100)" class="btn btn-primary" style="width: 100%;">${label_btn}</button>
         `;
         container.appendChild(div);
     });

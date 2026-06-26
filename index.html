@@ -45,7 +45,7 @@
             </div>
             <div class="card" style="text-align: center;">
                 <h3 id="card-vote-title" style="color: var(--primary);">VOTACIÓN</h3>
-                <p id="card-vote-p">Tú eliges: ¿Duelo 1v1 o Battle Royale? Vota cada semana desde tu perfil.</p>
+                <p><span id="card-vote-p">Tú eliges: ¿Duelo 1v1 o Battle Royale? Vota cada semana.</span> <a href="torneos.html" id="btn-view-tournaments-2" style="color: var(--primary); display: block; margin-top: 10px; font-size: 14px;">Ir a Votar →</a></p>
             </div>
             <div class="card" style="text-align: center;">
                 <h3 id="card-community-title" style="color: var(--primary);">COMUNIDAD LATAM</h3>
@@ -60,8 +60,9 @@
                 <div id="yt-status" class="hidden" style="position: absolute; top: -5px; right: -5px; background: green; color: white; font-size: 10px; padding: 2px 5px; border-radius: 10px; font-weight: bold;">LIVE</div>
             </div>
             <div id="yt-content" class="hidden card glass" style="position: absolute; bottom: 70px; right: 0; width: 320px; padding: 0; overflow: hidden; border: 1px solid rgba(255,0,0,0.5); box-shadow: 0 0 30px rgba(255,0,0,0.2);">
-                <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,0,0,0.1);">
+                <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
                     <h4 id="yt-title" style="font-size: 14px; margin: 0;">Nuestro Canal</h4>
+                    <button onclick="toggleYouTube()" style="background: none; border: none; color: white; cursor: pointer; font-size: 18px;">×</button>
                 </div>
                 <div style="padding: 15px;">
                     <div id="yt-video-container" style="background: #000; aspect-ratio: 16/9; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; border-radius: 8px; overflow: hidden; border: 1px solid #333;">
@@ -77,8 +78,9 @@
                 <span>💬</span> <span id="support-label">Soporte y Reclamos</span>
             </button>
             <div id="support-modal" class="hidden card glass" style="position: absolute; bottom: 60px; left: 0; width: 320px; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.2);">
-                <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);">
+                <div style="padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center;">
                     <h3 id="support-title" style="font-size: 16px; margin: 0;">Soporte y Reclamos</h3>
+                    <button onclick="toggleSupport()" style="background: none; border: none; color: white; cursor: pointer; font-size: 24px; line-height: 1;">×</button>
                 </div>
                 <div style="padding: 20px;">
                     <form id="support-form">
