@@ -7,6 +7,28 @@ try {
 
 let currentUser = null;
 
+// Sistema de Notificaciones (Toasts)
+function showToast(message, type = 'success') {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const icon = type === 'success' ? '✅' : '❌';
+    toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s ease-in forwards';
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
+
 async function init() {
     let session = null;
     if (sb) {
@@ -55,7 +77,7 @@ function setupSupportChat() {
 
     form.onsubmit = async (e) => {
         e.preventDefault();
-        if (!currentUser) return alert("Inicia sesión para enviar mensajes.");
+        if (!currentUser) return showToast("Inicia sesión para enviar mensajes.", 'error');
 
         const asunto = document.getElementById('sup-asunto').value;
         const mensaje = document.getElementById('sup-mensaje').value;
@@ -66,9 +88,9 @@ function setupSupportChat() {
             mensaje
         });
 
-        if (error) alert("Error: " + error.message);
+        if (error) showToast("Error: " + error.message, 'error');
         else {
-            alert("Mensaje enviado con éxito.");
+            showToast("Mensaje enviado con éxito.");
             form.reset();
             toggleSupport();
         }
@@ -137,8 +159,8 @@ function loadPayPalSDK(callback) {
 // MODAL DE PAGO Y PAYPAL
 window.openPayModal = async (id, titulo, monto) => {
     if (!currentUser) {
-        alert("Inicia sesión para inscribirte.");
-        window.location.href = 'auth.html';
+        showToast("Inicia sesión para inscribirte.", 'error');
+        setTimeout(() => window.location.href = 'auth.html', 1500);
         return;
     }
     const modal = document.getElementById('pay-modal');
@@ -171,7 +193,7 @@ window.openPayModal = async (id, titulo, monto) => {
             });
 
             if (error) {
-                alert("Error al registrar: " + error.message);
+            showToast("Error al registrar: " + error.message, 'error');
             } else {
                 // Verificar si se llenó el torneo
                 const { data: t } = await sb.from('torneos').select('max_participantes, titulo, tipo, precio_inscripcion, premio_descripcion').eq('id', id).single();
@@ -188,8 +210,8 @@ window.openPayModal = async (id, titulo, monto) => {
                     });
                 }
 
-                alert("¡Felicidades! Estás inscrito.");
-                location.reload();
+                showToast("¡Felicidades! Estás inscrito.");
+                setTimeout(() => location.reload(), 2000);
             }
         }
         }).render('#paypal-button-container');
@@ -207,7 +229,7 @@ async function loadVotingSystem() {
     btnBR.onclick = () => { selectedType = 'br'; btnBR.style.borderColor = 'red'; btn1v1.style.borderColor = '#333'; btnConfirm.disabled = false; };
 
     btnConfirm.onclick = async () => {
-        if (!currentUser) return alert("Inicia sesión para votar.");
+        if (!currentUser) return showToast("Inicia sesión para votar.", 'error');
 
         const now = new Date();
         const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
@@ -219,8 +241,8 @@ async function loadVotingSystem() {
             semana_inicio: weekStr
         });
 
-        if (error) alert(error.message);
-        else alert("¡Voto registrado!");
+        if (error) showToast(error.message, 'error');
+        else showToast("¡Voto registrado!");
     };
 }
 

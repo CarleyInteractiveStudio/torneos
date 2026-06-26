@@ -181,3 +181,45 @@ td {
 .hidden {
     display: none;
 }
+
+/* Toast Notifications */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    background: rgba(20, 20, 20, 0.95);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 250px;
+    border-left: 5px solid var(--primary);
+    animation: slideIn 0.3s ease-out forwards;
+    backdrop-filter: blur(10px);
+}
+
+.toast.success {
+    border-left-color: #00ff00;
+}
+
+.toast.error {
+    border-left-color: #ff0000;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}

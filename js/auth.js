@@ -6,6 +6,28 @@ try {
 }
 window.sb = sb;
 
+// Sistema de Notificaciones (Toasts)
+function showToast(message, type = 'success') {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const icon = type === 'success' ? '✅' : '❌';
+    toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s ease-in forwards';
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
+
 // Lógica de Registro
 document.getElementById('register-form')?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -18,14 +40,14 @@ document.getElementById('register-form')?.addEventListener('submit', async (e) =
     if (password !== passwordConfirm) {
         const lang = localStorage.getItem('preferred_lang') || 'es';
         const errorMsg = (typeof translations !== 'undefined') ? translations[lang].error_password_mismatch : "Las contraseñas no coinciden.";
-        alert(errorMsg);
+        showToast(errorMsg, 'error');
         return;
     }
 
     const { data, error } = await sb.auth.signUp({ email, password });
 
     if (error) {
-        alert("Error: " + error.message);
+        showToast("Error: " + error.message, 'error');
     } else if (data.user) {
         const pais = localStorage.getItem('user_country') || 'Desconocido';
         const { error: pError } = await sb.from('perfiles').insert({
@@ -37,12 +59,12 @@ document.getElementById('register-form')?.addEventListener('submit', async (e) =
         });
 
         if (pError) {
-            alert("Error perfil: " + pError.message);
+            showToast("Error perfil: " + pError.message, 'error');
         } else {
             const lang = localStorage.getItem('preferred_lang') || 'es';
             const welcomeMsg = (lang === 'es' ? '¡Bienvenido a la Arena, ' : (lang === 'fr' ? 'Bienvenue dans l\'arène, ' : (lang === 'ht' ? 'Byenvini nan Arena, ' : 'Bem-vindo à Arena, '))) + nickname + '!';
-            alert(welcomeMsg);
-            window.location.href = 'perfil.html';
+            showToast(welcomeMsg);
+            setTimeout(() => window.location.href = 'perfil.html', 2000);
         }
     }
 });
@@ -56,7 +78,7 @@ document.getElementById('login-form')?.addEventListener('submit', async (e) => {
     const { data, error } = await sb.auth.signInWithPassword({ email, password });
 
     if (error) {
-        alert("Error: " + error.message);
+        showToast("Error: " + error.message, 'error');
     } else {
         const pais = localStorage.getItem('user_country');
         if (pais) {
@@ -98,8 +120,8 @@ document.getElementById('recovery-form')?.addEventListener('submit', async (e) =
 
     if (data) {
         await sb.auth.resetPasswordForEmail(email);
-        alert("Enlace enviado a tu correo.");
+        showToast("Enlace enviado a tu correo.");
     } else {
-        alert("Los datos no coinciden.");
+        showToast("Los datos no coinciden.", 'error');
     }
 });

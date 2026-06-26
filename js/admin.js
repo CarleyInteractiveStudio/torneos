@@ -1,3 +1,25 @@
+// Sistema de Notificaciones (Toasts)
+function showToast(message, type = 'success') {
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const icon = type === 'success' ? '✅' : '❌';
+    toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s ease-in forwards';
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
+
 async function checkAdmin() {
     const { data: { user } } = await sb.auth.getUser();
     if (!user) window.location.href = 'auth.html';
@@ -21,8 +43,8 @@ document.getElementById('create-tournament-form')?.addEventListener('submit', as
     const premio = document.getElementById('t-premio').value;
 
     await sb.from('torneos').insert({ titulo, tipo, precio_inscripcion: precio, premio_descripcion: premio, estado: 'abierto' });
-    alert("Torneo creado!");
-    location.reload();
+    showToast("Torneo creado!");
+    setTimeout(() => location.reload(), 1500);
 });
 
 async function loadPendingPayments() {
@@ -94,8 +116,8 @@ window.addKill = async (partId, currentKills, userId) => {
 window.finalizeTournament = async (torneoId) => {
     if (confirm("¿Estás seguro de finalizar este torneo? Ya no se podrán sumar más kills y pasará al historial.")) {
         await sb.from('torneos').update({ estado: 'finalizado' }).eq('id', torneoId);
-        alert("Torneo finalizado con éxito.");
-        location.reload();
+        showToast("Torneo finalizado con éxito.");
+        setTimeout(() => location.reload(), 1500);
     }
 };
 
@@ -122,8 +144,8 @@ window.handleSeasonReset = async () => {
         // 3. Resetear puntos
         await sb.from('perfiles').update({ puntos_totales: 0 }).neq('id', '00000000-0000-0000-0000-000000000000');
 
-        alert("Temporada reiniciada y guardada con éxito.");
-        location.reload();
+        showToast("Temporada reiniciada y guardada con éxito.");
+        setTimeout(() => location.reload(), 1500);
     }
 };
 
