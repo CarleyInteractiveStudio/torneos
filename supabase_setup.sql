@@ -1,7 +1,7 @@
--- SQL para crear las tablas en Supabase
+-- SQL para configurar o actualizar las tablas en Supabase
 
--- 1. Perfiles
-CREATE TABLE perfiles (
+-- 1. Perfiles (Usando IF NOT EXISTS para evitar errores si ya existen)
+CREATE TABLE IF NOT EXISTS perfiles (
   id UUID REFERENCES auth.users ON DELETE CASCADE PRIMARY KEY,
   ff_id TEXT UNIQUE NOT NULL,
   nickname TEXT NOT NULL,
@@ -13,8 +13,16 @@ CREATE TABLE perfiles (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Asegurar que las columnas nuevas existan si la tabla ya existía
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='perfiles' AND column_name='pais') THEN
+    ALTER TABLE perfiles ADD COLUMN pais TEXT;
+  END IF;
+END $$;
+
 -- 2. Torneos
-CREATE TABLE torneos (
+CREATE TABLE IF NOT EXISTS torneos (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   titulo TEXT NOT NULL,
   tipo TEXT CHECK (tipo IN ('1v1', 'br')),
@@ -27,7 +35,7 @@ CREATE TABLE torneos (
 );
 
 -- 3. Participantes
-CREATE TABLE participantes (
+CREATE TABLE IF NOT EXISTS participantes (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   torneo_id UUID REFERENCES torneos(id) ON DELETE CASCADE,
   perfil_id UUID REFERENCES perfiles(id) ON DELETE CASCADE,
@@ -40,7 +48,7 @@ CREATE TABLE participantes (
 );
 
 -- 4. Votos
-CREATE TABLE votos (
+CREATE TABLE IF NOT EXISTS votos (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   perfil_id UUID REFERENCES perfiles(id) ON DELETE CASCADE,
   tipo_preferido TEXT NOT NULL,
@@ -49,7 +57,7 @@ CREATE TABLE votos (
 );
 
 -- 5. Mensajes de Soporte
-CREATE TABLE mensajes_soporte (
+CREATE TABLE IF NOT EXISTS mensajes_soporte (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   perfil_id UUID REFERENCES perfiles(id) ON DELETE CASCADE,
   mensaje TEXT NOT NULL,
@@ -59,7 +67,7 @@ CREATE TABLE mensajes_soporte (
 );
 
 -- 6. Historial de Temporadas
-CREATE TABLE historial_temporadas (
+CREATE TABLE IF NOT EXISTS historial_temporadas (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   mes_anio TEXT NOT NULL,
   perfil_id UUID REFERENCES perfiles(id) ON DELETE CASCADE,
@@ -68,7 +76,7 @@ CREATE TABLE historial_temporadas (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- RLS (Habilita Row Level Security y añade las políticas en el dashboard de Supabase)
+-- HABILITAR RLS
 ALTER TABLE perfiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE torneos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE participantes ENABLE ROW LEVEL SECURITY;
@@ -76,10 +84,39 @@ ALTER TABLE votos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE mensajes_soporte ENABLE ROW LEVEL SECURITY;
 ALTER TABLE historial_temporadas ENABLE ROW LEVEL SECURITY;
 
--- Políticas Sugeridas:
--- Perfiles: Lectura todos, Inserción auth.uid() = id.
--- Torneos: Lectura todos, Escritura solo admin.
--- Participantes: Lectura todos, Inserción auth.uid() = perfil_id.
--- Votos: Lectura todos, Upsert auth.uid() = perfil_id.
--- Soporte: Inserción auth.uid() = perfil_id, Lectura solo admin y el creador.
--- Historial: Lectura todos.
+-- POLÍTICAS (Usando DROP POLICY IF EXISTS para que se puedan re-ejecutar)
+
+-- Perfiles
+DROP POLICY IF EXISTS "Perfiles legibles por todos" ON perfiles;
+CREATE POLICY "Perfiles legibles por todos" ON perfiles FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Usuarios pueden insertar su propio perfil" ON perfiles;
+CREATE POLICY "Usuarios pueden insertar su propio perfil" ON perfiles FOR INSERT WITH CHECK (auth.uid() = id);
+
+DROP POLICY IF EXISTS "Usuarios pueden actualizar su propio perfil" ON perfiles;
+CREATE POLICY "Usuarios pueden actualizar su propio perfil" ON perfiles FOR UPDATE USING (auth.uid() = id);
+
+-- Torneos
+DROP POLICY IF EXISTS "Torneos legibles por todos" ON torneos;
+CREATE POLICY "Torneos legibles por todos" ON torneos FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Solo admin puede editar torneos" ON torneos;
+CREATE POLICY "Solo admin puede editar torneos" ON torneos FOR ALL USING (
+  EXISTS (SELECT 1 FROM perfiles WHERE id = auth.uid() AND es_admin = true)
+);
+
+-- Participantes
+DROP POLICY IF EXISTS "Participantes legibles por todos" ON participantes;
+CREATE POLICY "Participantes legibles por todos" ON participantes FOR SELECT USING (true);
+
+DROP POLICY IF EXISTS "Usuarios pueden inscribirse ellos mismos" ON participantes;
+CREATE POLICY "Usuarios pueden inscribirse ellos mismos" ON participantes FOR INSERT WITH CHECK (auth.uid() = perfil_id);
+
+-- Mensajes Soporte
+DROP POLICY IF EXISTS "Usuarios pueden enviar soporte" ON mensajes_soporte;
+CREATE POLICY "Usuarios pueden enviar soporte" ON mensajes_soporte FOR INSERT WITH CHECK (auth.uid() = perfil_id);
+
+DROP POLICY IF EXISTS "Admin puede leer todos los mensajes" ON mensajes_soporte;
+CREATE POLICY "Admin puede leer todos los mensajes" ON mensajes_soporte FOR SELECT USING (
+  EXISTS (SELECT 1 FROM perfiles WHERE id = auth.uid() AND es_admin = true) OR auth.uid() = perfil_id
+);

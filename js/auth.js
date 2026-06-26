@@ -35,8 +35,15 @@ document.getElementById('register-form')?.addEventListener('submit', async (e) =
             ff_id: ffid,
             pais: pais
         });
-        if (pError) alert("Error perfil: " + pError.message);
-        else window.location.href = 'perfil.html';
+
+        if (pError) {
+            alert("Error perfil: " + pError.message);
+        } else {
+            const lang = localStorage.getItem('preferred_lang') || 'es';
+            const welcomeMsg = (lang === 'es' ? '¡Bienvenido a la Arena, ' : (lang === 'fr' ? 'Bienvenue dans l\'arène, ' : (lang === 'ht' ? 'Byenvini nan Arena, ' : 'Bem-vindo à Arena, '))) + nickname + '!';
+            alert(welcomeMsg);
+            window.location.href = 'perfil.html';
+        }
     }
 });
 
