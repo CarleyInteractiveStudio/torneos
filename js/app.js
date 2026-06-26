@@ -151,9 +151,54 @@ async function loadTournaments() {
             <p style="color: #aaa; font-size: 14px;">${label_reward} ${t.premio_descripcion}</p>
             <p style="font-weight: bold; margin: 15px 0; font-size: 22px; color: #fff;">100 DOP <span style="font-size: 14px; color: #888;">($${finance.totalUSD} USD)</span></p>
             <button onclick="openPayModal('${t.id}', '${t.titulo}', 100)" class="btn btn-primary" style="width: 100%;">${label_btn}</button>
+            <div id="participants-list-${t.id}" style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                <p style="font-size: 12px; color: #888;">Cargando participantes...</p>
+            </div>
         `;
         container.appendChild(div);
+        loadTournamentParticipants(t.id);
     });
+}
+
+async function loadTournamentParticipants(torneoId) {
+    const container = document.getElementById(`participants-list-${torneoId}`);
+    if (!container || !sb) return;
+
+    const { data, error } = await sb.from('participantes').select('perfiles(nickname, ff_id)').eq('torneo_id', torneoId).eq('estado_pago', 'completado');
+
+    const lang = localStorage.getItem('preferred_lang') || 'es';
+    const t = (typeof translations !== 'undefined') ? translations[lang] : null;
+
+    if (error || !data) {
+        container.innerHTML = '';
+        return;
+    }
+
+    if (data.length === 0) {
+        container.innerHTML = `<p style="font-size: 12px; color: #555;">${t ? t.tournaments_no_participants : 'No hay jugadores alistados aún.'}</p>`;
+        return;
+    }
+
+    const listHtml = data.map(p => {
+        const divNick = document.createElement('div');
+        divNick.textContent = p.perfiles.nickname;
+        const divFFID = document.createElement('div');
+        divFFID.textContent = p.perfiles.ff_id;
+
+        return `
+            <div style="font-size: 13px; display: flex; justify-content: space-between; background: rgba(255,255,255,0.03); padding: 5px 10px; border-radius: 4px;">
+                <span>${divNick.innerHTML}</span>
+                <span style="color: #666; font-size: 11px;">ID: ${divFFID.innerHTML}</span>
+            </div>
+        `;
+    }).join('');
+
+    container.innerHTML = `
+        <p style="font-size: 12px; font-weight: bold; margin-bottom: 10px; color: var(--primary);">${t ? t.tournaments_list_title : 'JUGADORES ALISTADOS:'}</p>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+            ${listHtml}
+        </div>
+    `;
 }
 
 // CARGA DINÁMICA DE PAYPAL SDK
@@ -177,6 +222,9 @@ window.openPayModal = async (id, titulo, monto) => {
     document.getElementById('pay-torneo-name').innerText = titulo;
     const finance = await calculateTotalUSD(100); // 100 DOP
     document.getElementById('pay-monto').innerText = `${finance.totalUSD} (Eq. 100 DOP)`;
+
+    const btnRequest = document.getElementById('btn-request-admin');
+    btnRequest.onclick = () => requestAdminConfirmation(id, titulo);
 
     document.getElementById('paypal-button-container').innerHTML = 'Cargando botones de pago...';
 
@@ -253,6 +301,28 @@ async function loadVotingSystem() {
         if (error) showToast(error.message, 'error');
         else showToast("¡Voto registrado!");
     };
+}
+
+async function requestAdminConfirmation(torneoId, titulo) {
+    const lang = localStorage.getItem('preferred_lang') || 'es';
+    const t = (typeof translations !== 'undefined') ? translations[lang] : null;
+
+    if (!currentUser) return showToast("Inicia sesión para solicitar confirmación.", 'error');
+
+    const { error } = await sb.from('participantes').insert({
+        torneo_id: torneoId,
+        perfil_id: currentUser.id,
+        metodo_pago: 'admin_request',
+        estado_pago: 'solicitado_admin'
+    });
+
+    if (error) {
+        if (error.code === '23505') showToast("Ya has solicitado participar en este torneo.", 'error');
+        else showToast("Error: " + error.message, 'error');
+    } else {
+        showToast(t ? t.tournaments_request_sent : "Solicitud enviada al Administrador.");
+        document.getElementById('pay-modal').classList.add('hidden');
+    }
 }
 
 async function loadTournamentSlots() {
@@ -333,18 +403,25 @@ async function loadBrackets() {
         return;
     }
 
-    // Generar emparejamientos aleatorios (simulados)
+    // Generar emparejamientos deterministas por FF ID para consistencia entre usuarios
+    const sorted = [...participantes].sort((a, b) => a.perfiles.ff_id.localeCompare(b.perfiles.ff_id));
+
     let html = '<div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center;">';
-    for (let i = 0; i < participantes.length; i += 2) {
-        if (participantes[i + 1]) {
+    for (let i = 0; i < sorted.length; i += 2) {
+        const p1 = sorted[i].perfiles.nickname;
+        const d1 = document.createElement('div'); d1.textContent = p1;
+
+        if (sorted[i + 1]) {
+            const p2 = sorted[i + 1].perfiles.nickname;
+            const d2 = document.createElement('div'); d2.textContent = p2;
             html += `
-                <div class="card" style="margin:0; background:#111;">${participantes[i].perfiles.nickname}</div>
+                <div class="card" style="margin:0; background:#111;">${d1.innerHTML}</div>
                 <div style="color:var(--primary); font-weight:bold;">VS</div>
-                <div class="card" style="margin:0; background:#111;">${participantes[i+1].perfiles.nickname}</div>
+                <div class="card" style="margin:0; background:#111;">${d2.innerHTML}</div>
             `;
         } else {
             html += `
-                <div class="card" style="margin:0; background:#111;">${participantes[i].perfiles.nickname}</div>
+                <div class="card" style="margin:0; background:#111;">${d1.innerHTML}</div>
                 <div style="color:var(--primary); font-weight:bold;">BYE</div>
                 <div></div>
             `;

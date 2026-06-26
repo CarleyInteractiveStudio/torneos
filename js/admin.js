@@ -48,7 +48,7 @@ document.getElementById('create-tournament-form')?.addEventListener('submit', as
 });
 
 async function loadPendingPayments() {
-    const { data } = await sb.from('participantes').select('*, perfiles(nickname, ff_id), torneos(titulo)').eq('estado_pago', 'pendiente');
+    const { data } = await sb.from('participantes').select('*, perfiles(nickname, ff_id), torneos(titulo)').in('estado_pago', ['pendiente', 'solicitado_admin']);
     const table = document.getElementById('pending-payments');
     if (!table) return;
     table.innerHTML = data.map(p => `
@@ -56,7 +56,12 @@ async function loadPendingPayments() {
             <td>${p.perfiles.nickname}</td>
             <td>${p.perfiles.ff_id}</td>
             <td>${p.torneos.titulo}</td>
-            <td><button onclick="approvePayment('${p.id}')" class="btn btn-primary">OK</button></td>
+            <td>
+                <span style="font-size:10px; color:${p.estado_pago === 'solicitado_admin' ? 'orange' : '#888'}; display:block; margin-bottom:5px;">
+                    ${p.estado_pago === 'solicitado_admin' ? 'SOLICITUD MANUAL' : 'PAYPAL PENDIENTE'}
+                </span>
+                <button onclick="approvePayment('${p.id}')" class="btn btn-primary">OK</button>
+            </td>
         </tr>
     `).join('');
 }
